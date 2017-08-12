@@ -4,6 +4,9 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :username
       t.integer :games_played
       t.integer :games_won
+      t.integer :game_id
+      t.integer :score
+      t.text :rack, array: true, default: []
       t.timestamps
     end
   end
