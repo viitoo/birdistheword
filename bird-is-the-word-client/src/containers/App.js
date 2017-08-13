@@ -5,11 +5,10 @@ import board from '../board.json'
 
 class App extends Component{
   render(){
-    console.log(board)
     return (
       <div className="App">
         <h1>Bird Is the Word</h1>
-        
+        <Board board={board} />
       </div>
     )
   }
