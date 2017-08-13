@@ -22,3 +22,22 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.orange{
+  background-color: orange;
+}
+.blue{
+  background-color: blue;
+}
+.red{
+  background-color: red;
+}
+.green{
+  background-color: green;
+}
+.square{
+  display: inline-block;
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+}
