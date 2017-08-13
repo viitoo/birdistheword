@@ -1,11 +1,11 @@
 {
   "full_board":  [
       [
-        {"word": 3, "letter": 1, "value": "", "color": "orange"}, 
-        {"word": 1, "letter": 1, "value": "", "color": "white"},
-        {"word": 1, "letter": 1, "value": "", "color": "white"},
-        {"word": 1, "letter": 2, "value": "", "color": "blue"},
-        {"word": 1, "letter": 1, "value": "", "color": "white"},
+        {"word": 3, "letter": 1, "value": "H", "color": "orange"}, 
+        {"word": 1, "letter": 1, "value": "E", "color": "white"},
+        {"word": 1, "letter": 1, "value": "L", "color": "white"},
+        {"word": 1, "letter": 2, "value": "L", "color": "blue"},
+        {"word": 1, "letter": 1, "value": "O", "color": "white"},
         {"word": 1, "letter": 1, "value": "", "color": "white"},
         {"word": 1, "letter": 1, "value": "", "color": "white"},
         {"word": 3, "letter": 1, "value": "", "color": "orange"},
