@@ -1,7 +1,29 @@
-import React from 'react';
+import React, {Component} from 'react';
+import { ItemTypes } from '../Constants'
+import { DropTarget } from 'react-dnd'
+import { moveTile } from '../Game'
 
-const Square = (props) => (
-    <th className={"square " + props.square.color}>{props.square.value}</th>
-)
+const squareTarget = {
+  drop(props){
+    moveTile(props.x, props.y)
+  }
+}
 
-export default Square;
+function collect(connect, monitor){
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver()
+  }
+}
+
+
+class Square extends Component{
+  render(){
+    return(
+      <th className={"square " + this.props.square.color}>{this.props.square.value}</th>
+    )
+   
+  }
+} 
+
+export default DropTarget(ItemTypes.TILE, squareTarget, collect)(Square);
