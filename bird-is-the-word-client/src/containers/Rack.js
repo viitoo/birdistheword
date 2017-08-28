@@ -7,8 +7,13 @@ const Rack = (props) => {
     return <Tile letter={letter} />
     }
   )
+  const bag = props.bag.map((tile, index) => {
+      return <Tile letter={tile.letter} x={tile.x} y={tile.y} id={index}/>
+    }
+  )
   return(
     <div>
+      {bag}
       <h1>{props.players.players[0].name}</h1>
       <table>
         {rack}
