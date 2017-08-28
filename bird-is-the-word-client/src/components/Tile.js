@@ -22,7 +22,6 @@ class Tile extends Component{
     return connectDragSource(
       <div style={{
         opacity: isDragging ? 0.5 : 1,
-        fontSize: 25,
         fontWeight: 'bold',
         cursor: 'move'
       }}>
@@ -38,9 +37,3 @@ Tile.propTypes = {
 }
 
 export default DragSource(ItemTypes.TILE, tileSource, collect)(Tile);
-
-// const Tile = (props) => (
-//     <th className="square">{props.letter}</th>
-// )
-
-// export default Tile;
