@@ -5,6 +5,7 @@ import { DragSource } from 'react-dnd'
 
 const tileSource = {
   beginDrag(props){
+    //NEED TO ADD tileId (tileId: props.id)
     return {};
   }
 }

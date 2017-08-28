@@ -1,3 +1,5 @@
+
+
 let tilePosition = [0, 0];
 let observer = null;
 
