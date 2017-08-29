@@ -1,4 +1,3 @@
-import board from './board.json'
 import {
   createStore, 
   applyMiddleware,
@@ -6,18 +5,10 @@ import {
 } from 'redux'
 
 import thunk from 'redux-thunk'
-
-const boardReducer = (state = board, action) => {
-  switch(action.type){
-    case 'GET_BOARD':
-      return action.board
-    default:
-      return state;
-  }
-}
+import board from './reducers/board'
 
 const reducers = combineReducers({
-  board: boardReducer
+  board: board
 })
 const middleware = [thunk]
 
