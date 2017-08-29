@@ -1,5 +1,6 @@
 import React from 'react';
 import Row from '../components/Row'
+import { connect } from 'react-redux'
 
 const Board = (props) => {
   const rows = props.board.map((row, index) => {
@@ -11,4 +12,10 @@ const Board = (props) => {
     </table>
   )
 }
-export default Board;
+
+const mapStateToProps = (state) => {
+  return({
+    board: state.board
+  })
+}
+export default connect(mapStateToProps)(Board);
