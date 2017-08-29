@@ -11,7 +11,6 @@ import bag from '../bag.json'
 class App extends Component{
 
   render(){
-   debugger
     return (
       <div className="App">
         <h1>Bird Is the Word</h1>

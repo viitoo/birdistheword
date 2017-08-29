@@ -18,11 +18,15 @@ function collect(connect, monitor){
 
 
 class Square extends Component{
+  
+  
+
   render(){
-    return(
+    const {connectDropTarget, isOver} = this.props
+
+    return connectDropTarget(
       <th className={"square " + this.props.square.color}>{this.props.square.value}</th>
     )
-   
   }
 } 
 
