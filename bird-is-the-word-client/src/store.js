@@ -1,3 +1,4 @@
+import board from './board.json'
 import {
   createStore, 
   applyMiddleware,
@@ -6,7 +7,7 @@ import {
 
 import thunk from 'redux-thunk'
 
-const boardReducer = (state = [], action) => {
+const boardReducer = (state = board, action) => {
   switch(action.type){
     case 'GET_BOARD':
       return action.board

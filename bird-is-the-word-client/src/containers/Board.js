@@ -2,7 +2,7 @@ import React from 'react';
 import Row from '../components/Row'
 
 const Board = (props) => {
-  const rows = props.board.full_board.map((row, index) => {
+  const rows = props.board.map((row, index) => {
     return <Row row={row} x={index}/>
   })
   return(
