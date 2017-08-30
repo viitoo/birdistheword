@@ -18,9 +18,6 @@ function collect(connect, monitor){
 
 
 class Square extends Component{
-  
-  
-
   render(){
     const {connectDropTarget, isOver} = this.props
 

@@ -11,9 +11,12 @@ const setBoard = board => {
 // ASYNC ACTIONS
 
 export const getBoard = () => {
+  debugger
   return dispatch => {
     return fetch(`${API_URL}/games`)
-      .then(response => console.log(response.json()))
+      .then(response => response.json())
+      .then(response => response[0].board)
+      .then(board => dispatch(setBoard(board)))
       .catch(error => console.log(error));
   } 
 }
