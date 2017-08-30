@@ -4,14 +4,14 @@ import { connect } from 'react-redux'
 import { getBoard } from '../actions/board'
 
 class Board extends Component{
-  // Here will be an API call to get the BOARD
-  // componentDidMount(){
-      //this.props.getBoard()
-  // }
+  //Here will be an API call to get the BOARD
+  componentDidMount(){
+      this.props.getBoard()
+  }
 
   render(){
     const rows = this.props.board.map((row, index) => {
-      return <Row row={row} x={index}/>
+      return <Row row={row} x={index} key={index}/>
       }
     ) 
  
@@ -29,4 +29,4 @@ const mapStateToProps = (state) => {
     board: state.board
   })
 }
-export default connect(mapStateToProps)(Board);
+export default connect(mapStateToProps, { getBoard })(Board);
