@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 20170812192612) do
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
-    t.text     "board",      default: [],              array: true
-    t.text     "bag",        default: [],              array: true
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.json     "board"
+    t.json     "tiles"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

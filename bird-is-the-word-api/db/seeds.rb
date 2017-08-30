@@ -280,4 +280,133 @@ board = [
   ]
 ]
 
-game = Game.create(board: board)
+tiles = [
+    {"letter": "A", "points": 1, "player": ""},
+    {"letter": "A", "points": 1, "player": ""},
+    {"letter": "A", "points": 1, "player": ""},
+    {"letter": "A", "points": 1, "player": ""},
+    {"letter": "A", "points": 1, "player": ""},
+    {"letter": "A", "points": 1, "player": ""},
+    {"letter": "A", "points": 1, "player": ""},
+    {"letter": "A", "points": 1, "player": ""},
+    {"letter": "A", "points": 1, "player": ""},
+    {"letter": "A", "points": 1, "player": ""},
+
+    {"letter": "B", "points": 3, "player": ""},
+    {"letter": "B", "points": 3, "player": ""},
+
+    {"letter": "C", "points": 3, "player": ""},
+    {"letter": "C", "points": 3, "player": ""},
+
+    {"letter": "D", "points": 2, "player": ""},
+    {"letter": "D", "points": 2, "player": ""},
+    {"letter": "D", "points": 2, "player": ""},
+    {"letter": "D", "points": 2, "player": ""},
+
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+    {"letter": "E", "points": 1, "player": ""},
+
+    {"letter": "F", "points": 4, "player": ""},
+    {"letter": "F", "points": 4, "player": ""},
+
+    {"letter": "G", "points": 2, "player": ""},
+    {"letter": "G", "points": 2, "player": ""},
+    {"letter": "G", "points": 2, "player": ""},
+
+    {"letter": "H", "points": 4, "player": ""},
+    {"letter": "H", "points": 4, "player": ""},
+
+    {"letter": "I", "points": 1, "player": ""},
+    {"letter": "I", "points": 1, "player": ""},
+    {"letter": "I", "points": 1, "player": ""},
+    {"letter": "I", "points": 1, "player": ""},
+    {"letter": "I", "points": 1, "player": ""},
+    {"letter": "I", "points": 1, "player": ""},
+    {"letter": "I", "points": 1, "player": ""},
+    {"letter": "I", "points": 1, "player": ""},
+    {"letter": "I", "points": 1, "player": ""},
+
+    {"letter": "J", "points": 8, "player": ""},
+
+    {"letter": "K", "points": 5, "player": ""},
+
+    {"letter": "L", "points": 1, "player": ""},
+    {"letter": "L", "points": 1, "player": ""},
+    {"letter": "L", "points": 1, "player": ""},
+    {"letter": "L", "points": 1, "player": ""},
+
+    {"letter": "M", "points": 3, "player": ""},
+    {"letter": "M", "points": 3, "player": ""},
+
+    {"letter": "N", "points": 1, "player": ""},
+    {"letter": "N", "points": 1, "player": ""},
+    {"letter": "N", "points": 1, "player": ""},
+    {"letter": "N", "points": 1, "player": ""},
+    {"letter": "N", "points": 1, "player": ""},
+    {"letter": "N", "points": 1, "player": ""},
+
+    {"letter": "O", "points": 1, "player": ""},
+    {"letter": "O", "points": 1, "player": ""},
+    {"letter": "O", "points": 1, "player": ""},
+    {"letter": "O", "points": 1, "player": ""},
+    {"letter": "O", "points": 1, "player": ""},
+    {"letter": "O", "points": 1, "player": ""},
+    {"letter": "O", "points": 1, "player": ""},
+    {"letter": "O", "points": 1, "player": ""},
+
+    {"letter": "P", "points": 3, "player": ""},
+    {"letter": "P", "points": 3, "player": ""},
+
+    {"letter": "R", "points": 1, "player": ""},
+    {"letter": "R", "points": 1, "player": ""},
+    {"letter": "R", "points": 1, "player": ""},
+    {"letter": "R", "points": 1, "player": ""},
+    {"letter": "R", "points": 1, "player": ""},
+    {"letter": "R", "points": 1, "player": ""},
+
+    {"letter": "S", "points": 1, "player": ""},
+    {"letter": "S", "points": 1, "player": ""},
+    {"letter": "S", "points": 1, "player": ""},
+    {"letter": "S", "points": 1, "player": ""},
+
+    {"letter": "T", "points": 1, "player": ""},
+    {"letter": "T", "points": 1, "player": ""},
+    {"letter": "T", "points": 1, "player": ""},
+    {"letter": "T", "points": 1, "player": ""},
+    {"letter": "T", "points": 1, "player": ""},
+    {"letter": "T", "points": 1, "player": ""},
+
+    {"letter": "U", "points": 1, "player": ""},
+    {"letter": "U", "points": 1, "player": ""},
+    {"letter": "U", "points": 1, "player": ""},
+    {"letter": "U", "points": 1, "player": ""},
+
+    {"letter": "V", "points": 4, "player": ""},
+    {"letter": "V", "points": 4, "player": ""},
+
+    {"letter": "W", "points": 4, "player": ""},
+    {"letter": "W", "points": 4, "player": ""},
+
+    {"letter": "X", "points": 8, "player": ""},
+
+    {"letter": "Y", "points": 4, "player": ""},
+    {"letter": "W", "points": 4, "player": ""},
+
+    {"letter": "Z", "points": 10, "player": ""},
+
+    {"letter": "", "points": 0, "player": ""},
+    {"letter": "", "points": 0, "player": ""},
+
+]
+
+game = Game.create(board: board, tiles: tiles)
