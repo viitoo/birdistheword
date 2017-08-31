@@ -8,6 +8,7 @@ const setBoard = board => {
     board
   }
 }
+
 // ASYNC ACTIONS
 
 export const getBoard = () => {

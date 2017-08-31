@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import { ItemTypes } from '../Constants'
 import { DropTarget } from 'react-dnd'
 import { moveTile } from '../Game'
-
+//import {dropTile} from'actions/hgdrgdrg'
 const squareTarget = {
   drop(props){
-    moveTile(props.x, props.y)
+    // moveTile(props.x, props.y)
+    this.props.dropTile()
   }
 }
 
