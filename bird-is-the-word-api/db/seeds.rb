@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 #########BOARD#########
 board = [
   #row1
@@ -281,132 +273,62 @@ board = [
 ]
 
 tiles = [
-    {"letter": "A", "points": 1, "player": ""},
-    {"letter": "A", "points": 1, "player": ""},
-    {"letter": "A", "points": 1, "player": ""},
-    {"letter": "A", "points": 1, "player": ""},
-    {"letter": "A", "points": 1, "player": ""},
-    {"letter": "A", "points": 1, "player": ""},
-    {"letter": "A", "points": 1, "player": ""},
-    {"letter": "A", "points": 1, "player": ""},
-    {"letter": "A", "points": 1, "player": ""},
-    {"letter": "A", "points": 1, "player": ""},
-
-    {"letter": "B", "points": 3, "player": ""},
-    {"letter": "B", "points": 3, "player": ""},
-
-    {"letter": "C", "points": 3, "player": ""},
-    {"letter": "C", "points": 3, "player": ""},
-
-    {"letter": "D", "points": 2, "player": ""},
-    {"letter": "D", "points": 2, "player": ""},
-    {"letter": "D", "points": 2, "player": ""},
-    {"letter": "D", "points": 2, "player": ""},
-
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-    {"letter": "E", "points": 1, "player": ""},
-
-    {"letter": "F", "points": 4, "player": ""},
-    {"letter": "F", "points": 4, "player": ""},
-
-    {"letter": "G", "points": 2, "player": ""},
-    {"letter": "G", "points": 2, "player": ""},
-    {"letter": "G", "points": 2, "player": ""},
-
-    {"letter": "H", "points": 4, "player": ""},
-    {"letter": "H", "points": 4, "player": ""},
-
-    {"letter": "I", "points": 1, "player": ""},
-    {"letter": "I", "points": 1, "player": ""},
-    {"letter": "I", "points": 1, "player": ""},
-    {"letter": "I", "points": 1, "player": ""},
-    {"letter": "I", "points": 1, "player": ""},
-    {"letter": "I", "points": 1, "player": ""},
-    {"letter": "I", "points": 1, "player": ""},
-    {"letter": "I", "points": 1, "player": ""},
-    {"letter": "I", "points": 1, "player": ""},
-
-    {"letter": "J", "points": 8, "player": ""},
-
-    {"letter": "K", "points": 5, "player": ""},
-
-    {"letter": "L", "points": 1, "player": ""},
-    {"letter": "L", "points": 1, "player": ""},
-    {"letter": "L", "points": 1, "player": ""},
-    {"letter": "L", "points": 1, "player": ""},
-
-    {"letter": "M", "points": 3, "player": ""},
-    {"letter": "M", "points": 3, "player": ""},
-
-    {"letter": "N", "points": 1, "player": ""},
-    {"letter": "N", "points": 1, "player": ""},
-    {"letter": "N", "points": 1, "player": ""},
-    {"letter": "N", "points": 1, "player": ""},
-    {"letter": "N", "points": 1, "player": ""},
-    {"letter": "N", "points": 1, "player": ""},
-
-    {"letter": "O", "points": 1, "player": ""},
-    {"letter": "O", "points": 1, "player": ""},
-    {"letter": "O", "points": 1, "player": ""},
-    {"letter": "O", "points": 1, "player": ""},
-    {"letter": "O", "points": 1, "player": ""},
-    {"letter": "O", "points": 1, "player": ""},
-    {"letter": "O", "points": 1, "player": ""},
-    {"letter": "O", "points": 1, "player": ""},
-
-    {"letter": "P", "points": 3, "player": ""},
-    {"letter": "P", "points": 3, "player": ""},
-
-    {"letter": "R", "points": 1, "player": ""},
-    {"letter": "R", "points": 1, "player": ""},
-    {"letter": "R", "points": 1, "player": ""},
-    {"letter": "R", "points": 1, "player": ""},
-    {"letter": "R", "points": 1, "player": ""},
-    {"letter": "R", "points": 1, "player": ""},
-
-    {"letter": "S", "points": 1, "player": ""},
-    {"letter": "S", "points": 1, "player": ""},
-    {"letter": "S", "points": 1, "player": ""},
-    {"letter": "S", "points": 1, "player": ""},
-
-    {"letter": "T", "points": 1, "player": ""},
-    {"letter": "T", "points": 1, "player": ""},
-    {"letter": "T", "points": 1, "player": ""},
-    {"letter": "T", "points": 1, "player": ""},
-    {"letter": "T", "points": 1, "player": ""},
-    {"letter": "T", "points": 1, "player": ""},
-
-    {"letter": "U", "points": 1, "player": ""},
-    {"letter": "U", "points": 1, "player": ""},
-    {"letter": "U", "points": 1, "player": ""},
-    {"letter": "U", "points": 1, "player": ""},
-
-    {"letter": "V", "points": 4, "player": ""},
-    {"letter": "V", "points": 4, "player": ""},
-
-    {"letter": "W", "points": 4, "player": ""},
-    {"letter": "W", "points": 4, "player": ""},
-
-    {"letter": "X", "points": 8, "player": ""},
-
-    {"letter": "Y", "points": 4, "player": ""},
-    {"letter": "W", "points": 4, "player": ""},
-
-    {"letter": "Z", "points": 10, "player": ""},
-
-    {"letter": "", "points": 0, "player": ""},
-    {"letter": "", "points": 0, "player": ""},
-
+    "A", "A", "A", "A", "A", "A", "A", "A", "A", 
+    "B", "B", 
+    "C", "C", 
+    "D", "D", "D", "D", 
+    "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E",
+    "F", "F",
+    "G", "G", "G",
+    "H", "H",
+    "I", "I", "I", "I", "I", "I", "I", "I", "I",
+    "J",
+    "K",
+    "L", "L", "L", "L",
+    "M", "M",
+    "N", "N", "N", "N", "N", "N",
+    "O", "O", "O", "O", "O", "O", "O", "O",
+    "P", "P",
+    "R", "R", "R", "R", "R", "R", 
+    "S", "S", "S", "S",
+    "T", "T", "T", "T", "T", "T",
+    "U", "U", "U", "U",
+    "V", "V",
+    "W", "W",
+    "X",
+    "Y", "Y",
+    "Z",
+    "?", "?"
 ]
+
+#  points = {
+#     "A": 1,
+#     "B": 3,
+#     "C": 3,
+#     "D": 2,
+#     "E": 1,
+#     "F": 4,
+#     "G": 2,
+#     "H": 4,
+#     "I": 1,
+#     "J": 8,
+#     "K": 5,
+#     "L": 1,
+#     "M": 3,
+#     "N": 1,
+#     "O": 1,
+#     "P": 3,
+#     "Q": 10,
+#     "R": 1,
+#     "S": 1,
+#     "T": 1,
+#     "U": 1,
+#     "V": 4,
+#     "W": 4,
+#     "X": 8,
+#     "Y": 4,
+#     "Z": 10,
+#     "?": 0
+# }
 
 game = Game.create(board: board, tiles: tiles)

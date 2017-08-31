@@ -24,13 +24,10 @@ ActiveRecord::Schema.define(version: 20170812192612) do
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
-    t.integer  "games_played"
-    t.integer  "games_won"
-    t.integer  "game_id"
     t.integer  "score"
-    t.text     "rack",         default: [],              array: true
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.text     "rack",       default: [],              array: true
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
 end
