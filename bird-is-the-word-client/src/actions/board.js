@@ -9,10 +9,19 @@ const setBoard = board => {
   }
 }
 
+const setTile = (x, y, letter) => {
+  return {
+    type: 'DROP_TILE',
+    x,
+    y, 
+    letter
+  }
+ 
+}
+
 // ASYNC ACTIONS
 
 export const getBoard = () => {
-  debugger
   return dispatch => {
     return fetch(`${API_URL}/games`)
       .then(response => response.json())
@@ -20,4 +29,14 @@ export const getBoard = () => {
       .then(board => dispatch(setBoard(board)))
       .catch(error => console.log(error));
   } 
+}
+
+
+
+
+export const dropTile = (x, y, letter) => {
+  return dispatch => {
+    return dispatch(setTile(x, y, letter))
+  }
+  
 }
