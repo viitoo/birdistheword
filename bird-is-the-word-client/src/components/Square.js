@@ -8,8 +8,8 @@ import { connect } from 'react-redux'
 const squareTarget = {
   drop(props, monitor){
     const letter = monitor.getItem().tileValue
-    dropTile(props.x, props.y, letter)
-  },
+    props.dropTile(props.x, props.y, letter)
+  }
 }
 
 function collect(connect, monitor){
@@ -27,4 +27,4 @@ class Square extends Component{
     )
   }
 } 
-export default compose(DropTarget(ItemTypes.TILE, squareTarget, collect), connect(null, {dropTile}))(Square);
+export default compose(connect(null, {dropTile}), DropTarget(ItemTypes.TILE, squareTarget, collect))(Square);

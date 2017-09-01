@@ -9,12 +9,12 @@ const setBoard = board => {
   }
 }
 
-const setTile = (x, y, letter) => {
-  return {
-    type: 'DROP_TILE',
-    x,
-    y, 
-    letter
+export const dropTile = (x, y, letter) => {
+  return{
+      type: 'DROP_TILE',
+      x,
+      y, 
+      letter
   }
  
 }
@@ -31,12 +31,3 @@ export const getBoard = () => {
   } 
 }
 
-
-
-
-export const dropTile = (x, y, letter) => {
-  return dispatch => {
-    return dispatch(setTile(x, y, letter))
-  }
-  
-}
