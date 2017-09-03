@@ -2,11 +2,17 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { ItemTypes } from '../Constants';
 import { DragSource } from 'react-dnd'
+import { updateTilePosition } from '../actions/tile'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 
 const tileSource = {
   beginDrag(props){
-    console.log(props.letter)
-    return {tileValue: props.letter, x: props.x, y: props.y, id: props.id};
+    return {letter: props.letter, x: props.x, y: props.y, id: props.id};
+  },
+  endDrag(props, monitor, component){
+    const drop = monitor.getDropResult()
+    props.updateTilePosition({id: props.id, x: drop.x, y: drop.y, letter: props.letter})
   }
 }
 
@@ -39,4 +45,4 @@ Tile.propTypes = {
   isDragging: PropTypes.bool.isRequired
 }
 
-export default DragSource(ItemTypes.TILE, tileSource, collect)(Tile);
+export default compose(connect(null, {updateTilePosition}), DragSource(ItemTypes.TILE, tileSource, collect)(Tile));

@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
 import { ItemTypes } from '../Constants'
 import { DropTarget } from 'react-dnd'
-import { dropTile } from '../actions/board'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import Tile from './Tile'
 
 const squareTarget = {
   drop(props, monitor, component){
-    const letter = monitor.getItem().tileValue
-    console.log(monitor.getItem())
+    // const letter = monitor.getItem().tileValue
+    const tile = monitor.getItem()
+    
+      props.updateTilePosition({id: tile.id, x: props.x, y: props.y, letter: tile.letter})
+    
+    return {x: props.x, y: props.y}
     // props.dropTile(props.x, props.y, letter)
 
     //When .didDrop() === true
@@ -23,7 +26,6 @@ function collect(connect, monitor){
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
     getItem: monitor.getItem(),
-    didDrop: monitor.didDrop()
   }
 }
 
@@ -58,4 +60,4 @@ const mapStateToProps = (state) => {
     tiles: state.tiles
   })
 }
-export default compose(connect(mapStateToProps, {dropTile}), DropTarget(ItemTypes.TILE, squareTarget, collect))(Square);
+export default compose(connect(mapStateToProps), DropTarget(ItemTypes.TILE, squareTarget, collect))(Square);
