@@ -10,7 +10,7 @@ const squareTarget = {
     // const letter = monitor.getItem().tileValue
     const tile = monitor.getItem()
     
-      props.updateTilePosition({id: tile.id, x: props.x, y: props.y, letter: tile.letter})
+      // props.updateTilePosition({id: tile.id, x: props.x, y: props.y, letter: tile.letter})
     
     return {x: props.x, y: props.y}
     // props.dropTile(props.x, props.y, letter)

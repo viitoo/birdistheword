@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { ItemTypes } from '../Constants';
-import { DragSource } from 'react-dnd'
 import { updateTilePosition } from '../actions/tile'
+import { DragSource } from 'react-dnd'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 
@@ -45,4 +45,4 @@ Tile.propTypes = {
   isDragging: PropTypes.bool.isRequired
 }
 
-export default compose(connect(null, {updateTilePosition}), DragSource(ItemTypes.TILE, tileSource, collect)(Tile));
+export default compose(connect(null, {updateTilePosition}), DragSource(ItemTypes.TILE, tileSource, collect))(Tile);
