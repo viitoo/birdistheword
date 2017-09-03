@@ -14,7 +14,6 @@ class App extends Component{
       <div className="App">
         <h1>Bird Is the Word</h1>
         <Board />
-        <br />
         <Rack players={players} bag={bag}/>
       </div>
     )

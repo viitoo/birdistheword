@@ -23,3 +23,28 @@ table{
 td, th {
   border: 1px solid black;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.tile{
+  background-color: yellow;
+  width: 39px;
+  height: 39px;
+  margin: 0;
+  text-align: center;
+  /*vertical-align: middle;*/
+  line-height: 39px;
+  /*margin: 10px;*/
+}
+
+
+table{
+    border: 1px solid black;
+    table-layout: fixed;
+    width: 600px;
+    height: 600px;
+}

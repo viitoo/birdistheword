@@ -6,7 +6,7 @@ import { DragSource } from 'react-dnd'
 const tileSource = {
   beginDrag(props){
     console.log(props.letter)
-    return {tileValue: props.letter};
+    return {tileValue: props.letter, x: props.x, y: props.y};
   }
 }
 
@@ -26,7 +26,9 @@ class Tile extends Component{
         fontWeight: 'bold',
         cursor: 'move'
       }}>
-        <th className="square">{this.props.letter}</th>
+        <div className="tile">
+          {this.props.letter}
+        </div>
       </div>
     )
   }

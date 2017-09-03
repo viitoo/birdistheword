@@ -14,10 +14,6 @@ const Rack = (props) => {
   return(
     <div>
       {bag}
-      <h1>{props.players.players[0].name}</h1>
-      <table>
-        {rack}
-      </table>
     </div>
   )
   
