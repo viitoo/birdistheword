@@ -36,7 +36,7 @@ class Square extends Component{
     }
     const tile = this.props.tiles.find(findTile);
     if (tile !== undefined){
-       return <Tile x={tile.x} y={tile.y} letter = {"A"}/>
+       return <Tile x={tile.x} y={tile.y} letter = {tile.letter}/>
     }
    
   }

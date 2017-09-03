@@ -3,9 +3,9 @@ export default (state = [], action) => {
     case 'GET_BOARD':
       return action.board
     case 'DROP_TILE':
-      const newState = JSON.parse(JSON.stringify(state))
-      newState[action.x][action.y].value = action.letter
-      return newState
+      // const newState = JSON.parse(JSON.stringify(state))
+      // newState[action.x][action.y].value = action.letter
+      // return newState
 
       const row = state[action.x];
       const updatedRow = [
