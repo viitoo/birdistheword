@@ -8,11 +8,11 @@ import { connect } from 'react-redux'
 
 const tileSource = {
   beginDrag(props){
-    return {letter: props.letter, x: props.x, y: props.y, id: props.id};
+    return {};
   },
   endDrag(props, monitor, component){
     const drop = monitor.getDropResult()
-    props.updateTilePosition({id: props.id, x: drop.x, y: drop.y, letter: props.letter})
+    props.updateTilePosition(props.id, drop.x, drop.y)
   }
 }
 

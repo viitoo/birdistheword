@@ -3,7 +3,8 @@ import bag from '../bag.json'
 export default (state = bag, action) => {
   switch(action.type){
     case 'UPDATE_POSITION':
-      return [...state.slice(0, action.item.id), action.item, ...state.slice(action.item.id + 1)]
+      var item = Object.assign({}, state[action.id], {x: action.x, y: action.y, id:action.id})
+      return [...state.slice(0, action.id), item, ...state.slice(action.id + 1)]
     default:
       return state;
   }

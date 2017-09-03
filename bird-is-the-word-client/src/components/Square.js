@@ -38,7 +38,7 @@ class Square extends Component{
     }
     const tile = this.props.tiles.find(findTile);
     if (tile !== undefined){
-       return <Tile x={tile.x} y={tile.y} letter = {tile.letter}/>
+       return <Tile x={tile.x} y={tile.y} letter = {tile.letter} id={tile.id}/>
     }
    
   }
@@ -49,7 +49,7 @@ class Square extends Component{
     
     return connectDropTarget(
         <td className={"square " + this.props.square.color}>{this.props.square.value}
-        {this.renderTile(this.props.x, this.props.y)}
+        {this.renderTile(this.props.x, this.props.y, this.props.id)}
         </td>
     )
   }

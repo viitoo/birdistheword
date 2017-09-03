@@ -1,8 +1,10 @@
 const API_URL = process.env.REACT_APP_API_URL
 
-export const updateTilePosition = (item) => {
+export const updateTilePosition = (id, x, y) => {
   return {
     type: 'UPDATE_POSITION',
-    item
+    id,
+    x,
+    y
   }
 }
