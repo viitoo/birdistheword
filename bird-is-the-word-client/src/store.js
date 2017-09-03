@@ -9,7 +9,7 @@ import board from './reducers/board'
 import tiles from './reducers/tiles'
 
 const reducers = combineReducers({
-  board: board
+  board: board,
   tiles: tiles
 })
 const middleware = [thunk]

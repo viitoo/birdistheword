@@ -7,8 +7,9 @@ import { connect } from 'react-redux'
 import Tile from './Tile'
 
 const squareTarget = {
-  drop(props, monitor){
+  drop(props, monitor, component){
     const letter = monitor.getItem().tileValue
+    console.log(monitor.getItem())
     // props.dropTile(props.x, props.y, letter)
 
     //When .didDrop() === true
@@ -21,31 +22,40 @@ function collect(connect, monitor){
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
-    getItem: monitor.getItem()
+    getItem: monitor.getItem(),
+    didDrop: monitor.didDrop()
   }
 }
 
 class Square extends Component{
 
 
-  // renderTile(x,y) {
-  //    if ( x === this.props.getItem.x  && y === this.props.getItem.y) {
-  //      <Tile letter={"A"} x={x} y={y} style={{
-  //       position: 'relative',
-  //       top: 0,
-  //       left: 0
-  //       }}/>
-  //    }
-  //  }
+  renderTile(x, y){
+    function findTile(tile){
+      return tile.x === x && tile.y === y
+    }
+    const tile = this.props.tiles.find(findTile);
+    if (tile !== undefined){
+       return <Tile x={tile.x} y={tile.y} letter = {"A"}/>
+    }
+   
+  }
 
   render(){
-    console.log(this.props.getItem)
-    const {connectDropTarget, isOver} = this.props
-    // renderTile(this.props.square.x, this.props.square.y)
+    // console.log(this.props.getItem)
+    const {connectDropTarget, isOver, didDrop} = this.props
+    
     return connectDropTarget(
         <td className={"square " + this.props.square.color}>{this.props.square.value}
+        {this.renderTile(this.props.x, this.props.y)}
         </td>
     )
   }
 } 
-export default compose(connect(null, {dropTile}), DropTarget(ItemTypes.TILE, squareTarget, collect))(Square);
+
+const mapStateToProps = (state) => {
+  return({
+    tiles: state.tiles
+  })
+}
+export default compose(connect(mapStateToProps, {dropTile}), DropTarget(ItemTypes.TILE, squareTarget, collect))(Square);

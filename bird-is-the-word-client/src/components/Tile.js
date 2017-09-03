@@ -6,7 +6,7 @@ import { DragSource } from 'react-dnd'
 const tileSource = {
   beginDrag(props){
     console.log(props.letter)
-    return {tileValue: props.letter, x: props.x, y: props.y};
+    return {tileValue: props.letter, x: props.x, y: props.y, id: props.id};
   }
 }
 
