@@ -17,7 +17,9 @@ class Board extends Component{
     ) 
     return(
       <table>
-        {rows}
+        <tbody>
+          {rows}
+        </tbody>
       </table>
   )
   }

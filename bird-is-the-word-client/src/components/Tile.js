@@ -34,6 +34,7 @@ class Tile extends Component{
       }}>
         <div className="tile">
           {this.props.letter}
+          <span style={{verticalAlign: 'sub', fontSize: '0.7em'}}>{this.props.points}</span>
         </div>
       </div>
     )

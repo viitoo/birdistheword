@@ -8,7 +8,7 @@ const Rack = (props) => {
     }
   )
   const bag = props.bag.map((tile, index) => {
-      return <Tile letter={tile.letter} x={tile.x} y={tile.y} id={index}/>
+      return <Tile letter={tile.letter} x={tile.x} y={tile.y} id={index} points={tile.points}/>
     }
   )
   return(
