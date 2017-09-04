@@ -12,7 +12,14 @@ const tileSource = {
   },
   endDrag(props, monitor, component){
     const drop = monitor.getDropResult()
-    props.updateTilePosition(props.id, drop.x, drop.y)
+    const didDrop = monitor.didDrop();
+    if (!didDrop) {
+      props.updateTilePosition(props.id, props.x, props.y)
+    }
+    else{
+      props.updateTilePosition(props.id, drop.x, drop.y)
+    }
+    
   }
 }
 
