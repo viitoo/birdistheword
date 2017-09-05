@@ -5,10 +5,13 @@ import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 import store from './store.js'
 import { Provider } from 'react-redux'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <Route path="/game" component={App} />
+    </Router>
   </Provider>, 
   document.getElementById('root'));
 registerServiceWorker();
