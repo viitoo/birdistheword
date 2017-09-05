@@ -22,10 +22,12 @@ class Square extends Component{
 
 
   renderTile(x, y){
+
     function findTile(tile){
       return tile.x === x && tile.y === y
     }
     var tile = this.props.tiles.find(findTile);
+    
     if (tile !== undefined){
        return <Tile x={tile.x} y={tile.y} letter = {tile.letter} id={tile.id} points={tile.points}/>
     }

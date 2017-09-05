@@ -1,19 +1,18 @@
-{
-  "players": [
+[
     {
       "name": "Jamie", 
       "total_games": 10, 
       "games_won": 5, 
       "current_score": 78, 
-      "rack": ["A", "J", "B", "C", "U", "I", "M"]
+      "rack": [0, 5, 7, 10, 55, 90, 81]
     },
   {
     "name": "Lucya",
     "total_games": 2,
     "games_won": 1,
     "current_score": 99,
-    "rack": ["N", "L", "B", "F", "A", "P", "W"]
+    "rack": []
   }
-  ]
-}
+]
+
 
