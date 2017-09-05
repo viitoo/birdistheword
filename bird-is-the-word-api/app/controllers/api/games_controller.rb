@@ -42,6 +42,6 @@ class Api::GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:board, :bag)
+    params.require(:game).permit(:board, :bag, :player_1_id, :player_2_id)
   end
 end
