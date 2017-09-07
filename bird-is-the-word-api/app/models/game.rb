@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
-  has_one :player_1, class_name: 'User', foreign_key: 'player_1_id'
-  has_one :player_2, class_name: 'User', foreign_key: 'player_2_id'
+  has_many :game_players
+  has_many :players, through: :game_players, source: :user
   after_initialize :init
   def init
     self.board = [
