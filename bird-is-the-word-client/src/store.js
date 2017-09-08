@@ -7,8 +7,10 @@ import {
 import thunk from 'redux-thunk'
 import board from './reducers/board'
 import tiles from './reducers/tiles'
+import game from './reducers/game'
 
 const reducers = combineReducers({
+  game: game,
   board: board,
   tiles: tiles
 })

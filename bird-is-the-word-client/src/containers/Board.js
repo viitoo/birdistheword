@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 
 
 class Board extends Component{
-  //Here will be an API call to get the BOARD
- 
 
   render(){
     
