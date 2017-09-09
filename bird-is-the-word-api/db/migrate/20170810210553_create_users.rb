@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.text :rack, array: true, default: []
       t.integer :player_1_id
       t.integer :player_2_id
+      t.string :password_digest
       t.timestamps
     end
   end
