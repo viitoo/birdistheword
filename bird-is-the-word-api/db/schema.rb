@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20170907011425) do
     t.integer  "user_id"
     t.integer  "game_id"
     t.integer  "player_number"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.text     "rack",          default: [],              array: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "games", force: :cascade do |t|
@@ -33,12 +34,9 @@ ActiveRecord::Schema.define(version: 20170907011425) do
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.integer  "score"
-    t.text     "rack",            default: [],              array: true
-    t.integer  "player_1_id"
-    t.integer  "player_2_id"
     t.string   "password_digest"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
