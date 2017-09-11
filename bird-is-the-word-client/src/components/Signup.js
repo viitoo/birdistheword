@@ -8,12 +8,12 @@ export default class Signup extends Component{
         <form onSubmit={console.log("submitted")}>
           <h1>Please Sign Up</h1>
           <label>Username</label>
-          <input name="username"/><br/>
+          <input type="username"/><br/>
           <label>Password</label>
-          <input name="password"/><br/>
+          <input type="password"/><br/>
           <label>Password Confirmation</label>
-          <input name="password_confirmation"/><br/>
-          <Link to="/welcome">Sign Up</Link>
+          <input type="password"/><br/>
+          <button type="submit">Create user</button>
         </form>
       </div>
     )
