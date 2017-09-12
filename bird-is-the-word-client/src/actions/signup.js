@@ -6,6 +6,13 @@ export const authenticationRequest = () => {
   }
 }
 
+export const setCurrentUser = user => {
+  return{
+    type: 'AUTHENTICATION_SUCCESS',
+    user
+  }
+}
+
 /* Async Actions*/
 
 export const signup = (user, router) => {
@@ -21,8 +28,14 @@ export const signup = (user, router) => {
     })
     .then(response => response.json())
     .then(body => {
+      const slug = body.user.username
+      localStorage.setItem('bird.is.the.word.token', body.token)
       dispatch(setCurrentUser(body.user))
       dispatch(reset('signup'))
+      router.history.replace(`/users/${slug}/profile`)
+    })
+    .catch(error => {
+      throw new SubmissionError(error)
     })
   }
 }

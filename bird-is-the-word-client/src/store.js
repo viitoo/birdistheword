@@ -8,10 +8,10 @@ import thunk from 'redux-thunk'
 import board from './reducers/board'
 import tiles from './reducers/tiles'
 import game from './reducers/game'
-import auth from'./reducers/auth'
+import session from'./reducers/session'
 
 const reducers = combineReducers({
-  auth: auth,
+  session: session,
   game: game,
   board: board,
   tiles: tiles
