@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux';  
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 import * as sessionActions from '../actions/sessionActions';
 
-class Signup extends Component{
+class Login extends Component{
 
   static contextTypes = {
     router: PropTypes.object
@@ -12,7 +13,7 @@ class Signup extends Component{
 
   constructor(props){
     super(props);
-    this.state = {user: {username: '', password: '', password_confirmation: ''}}
+    this.state = {user: {username: '', password: ''}}
     this.onChange = this.onChange.bind(this);
     this.onSave = this.onSave.bind(this);
   }
@@ -26,12 +27,12 @@ class Signup extends Component{
 
   onSave(event){
     event.preventDefault();
-    this.props.actions.signUpUser(this.state.user, this.context.router)
+    this.props.actions.logInUser(this.state.user, this.context.router)
   }
   render(){
     return(
       <div>
-        <h1>Please Sign Up</h1>
+        <h1>Please Log In</h1>
          <form>
 
          <label>Username</label>
@@ -46,18 +47,12 @@ class Signup extends Component{
             type="password"
             value={this.state.user.password}
             onChange={this.onChange}/>
-        
-          <label>Password Confirmation</label>
-          <input
-            name="password_confirmation"
-            type="password"
-            value={this.state.user.password_confirmation}
-            onChange={this.onChange}/>
 
           <input
             type="submit"
             onClick={this.onSave}/>
           </form>
+          Don't have an account? <Link to={"/signup"}>Sign Up</Link><br/>
       </div>
     )
   }
@@ -69,4 +64,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Signup)
+export default connect(null, mapDispatchToProps)(Login)
