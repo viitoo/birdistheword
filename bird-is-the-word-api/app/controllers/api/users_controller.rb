@@ -16,7 +16,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    render json: @user
+    render json: @user.attributes.merge({games: @user.games})
   end
 
   private
@@ -27,5 +27,9 @@ class Api::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :password, :password_confirmation)
+  end
+
+  def user_games
+    User.last.games.map(&:id)
   end
 end

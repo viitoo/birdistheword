@@ -1,5 +1,5 @@
 class Api::GamesController < ApplicationController
-
+  before_action :authenticate_token!
   before_action :set_game, only: [:show, :update, :destroy]
 
   def index
@@ -9,6 +9,7 @@ class Api::GamesController < ApplicationController
   def create
     game = Game.new
     if game.save
+      GamePlayer.create(game_id: game.id, user_id: @user.id, player_number: 1)
       render json: game
     else
       render json: {message: "Error. Try again."}
@@ -42,6 +43,6 @@ class Api::GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:board, :bag, :player_1_id, :player_2_id)
+    params.require(:game).permit(:board, :bag)
   end
 end
