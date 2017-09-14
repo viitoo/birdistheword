@@ -77,3 +77,25 @@ export const signUpUser = (user, router) => {
     })
   }
 }
+
+export const refreshAuth = (token) => {
+    return dispatch => {
+    dispatch(authenticationRequest())
+    return fetch(`${API_URL}/auth/refresh`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization':  `JWT ${token}`
+      }
+  })
+    .then(response => response.json())
+    .then(body => {
+      console.log(body.user)
+      dispatch(setCurrentUser(body.user))   
+    })
+    .catch(error => {
+      error => (console.log(error))
+      // throw new SubmissionError(error)
+    })
+  }
+}
