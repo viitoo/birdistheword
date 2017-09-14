@@ -17,7 +17,7 @@ class Game extends Component{
 
   render(){
     return (
-      <div className="App">
+      <div>
         <h1>Bird Is the Word</h1>
         <Board board={this.props.board}/>
         <Rack players={players} bag={bag}/>

@@ -33,8 +33,6 @@ class Login extends Component{
     return(
       <div>
         <h1>Please Log In</h1>
-         <form>
-
          <label>Username</label>
           <input
             name="username"
@@ -51,7 +49,7 @@ class Login extends Component{
           <input
             type="submit"
             onClick={this.onSave}/>
-          </form>
+        
           Don't have an account? <Link to={"/signup"}>Sign Up</Link><br/>
       </div>
     )

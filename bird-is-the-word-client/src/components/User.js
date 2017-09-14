@@ -1,22 +1,22 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { createGame } from '../actions/game'
+import { logOut} from '../actions/sessionActions'
 import { connect } from 'react-redux'
-class Welcome extends Component{
+class User extends Component{
   render(){
     return(
       <div>
         <h1>Welcome to Bird Is the Word!</h1>
+        <button onClick={ this.props.logOut}>Log out</button>
         <Link to={"/game"} onClick={ this.props.createGame }>Start New Game</Link><br />
         <Link to={"/"}>Join an Existing Game</Link>
-        <h1>Continue playing</h1>
-        <p>vs. Jamie </p>
-        <p>vs. Andrea</p>
-        <p>vs.Sarah</p>
+        <h1>Your games:</h1>
+        
       </div>
     )
   }
 }
 
 
-export default connect(null, {createGame})(Welcome)
+export default connect(null, {createGame, logOut})(User)

@@ -32,7 +32,7 @@ class Signup extends Component{
     return(
       <div>
         <h1>Please Sign Up</h1>
-         <form>
+        
 
          <label>Username</label>
           <input
@@ -57,7 +57,7 @@ class Signup extends Component{
           <input
             type="submit"
             onClick={this.onSave}/>
-          </form>
+         
       </div>
     )
   }

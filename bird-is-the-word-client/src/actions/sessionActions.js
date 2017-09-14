@@ -16,6 +16,13 @@ export const setCurrentUser = user => {
   }
 }
 
+export const logOut = (router) => {
+  return {
+    type: 'LOG_OUT'
+  }
+  router.history.replace('/')
+}
+
 /* Async Actions*/
 
 export const logInUser = (user, router) => {
@@ -34,7 +41,8 @@ export const logInUser = (user, router) => {
       const slug = body.user.username
       localStorage.setItem('jwt', body.token)
       dispatch(setCurrentUser(body.user))
-      router.history.replace(`/welcome`)
+      router.history.replace(`/users/${slug}`)
+     
     })
     .catch(error => {
       error => (console.log(error))
@@ -58,9 +66,10 @@ export const signUpUser = (user, router) => {
     .then(body => {
       const slug = body.user.username
       localStorage.setItem('jwt', body.token)
-      dispatch(setCurrentUser(body.user))
       // dispatch(reset('signup'))
+      dispatch(setCurrentUser(body.user))
       router.history.replace(`/welcome`)
+      
     })
     .catch(error => {
       error => (console.log(error))

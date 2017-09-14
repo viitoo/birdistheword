@@ -21,6 +21,13 @@ export default (state = initialState, action) => {
       isAuthenticating: false,
       currentUser: action.user
     }
+  case 'LOG_OUT':
+    console.log("logging out..")
+    return{
+      isAuthenticated: false,
+      isAuthenticating: false,
+      currentUser: {}
+    }
     default:
       return state;
   }
