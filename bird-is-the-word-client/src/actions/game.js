@@ -27,7 +27,8 @@ export const createGame = () => {
     return fetch(`${API_URL}/games`, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.jwt}`
       }
     })
       .then(response => response.json())

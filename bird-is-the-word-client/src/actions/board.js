@@ -19,11 +19,18 @@ export const dropTile = (x, y, letter) => {
  
 }
 
+
 // ASYNC ACTIONS
 
 export const getBoard = () => {
   return dispatch => {
-    return fetch(`${API_URL}/games`)
+    return fetch(`${API_URL}/games`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.jwt}`
+      }
+    })
       .then(response => response.json())
       .then(response => response[0].board)
       .then(board => dispatch(setBoard(board)))
