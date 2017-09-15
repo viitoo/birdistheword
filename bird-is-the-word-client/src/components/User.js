@@ -7,7 +7,7 @@ class User extends Component{
   render(){
     return(
       <div>
-        <h1>Welcome to Bird Is the Word!</h1>
+        <h1>Welcome to Bird Is the Word, {this.props.user.username}! </h1>
         <button onClick={ this.props.logOut}>Log out</button>
         <Link to={"/game"} onClick={ this.props.createGame }>Start New Game</Link><br />
         <Link to={"/"}>Join an Existing Game</Link>
