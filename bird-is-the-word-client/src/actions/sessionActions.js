@@ -40,8 +40,8 @@ export const logInUser = (user, router) => {
     .then(body => {
       const slug = body.user.username
       localStorage.setItem('jwt', body.token)
-      localStorage.setItem('user_id', body.user.id)
-      localStorage.setItem('username', body.user.username)
+      // localStorage.setItem('user_id', body.user.id)
+      // localStorage.setItem('username', body.user.username)
       dispatch(setCurrentUser(body.user))
       router.history.replace(`/users/${slug}`)
      
@@ -68,9 +68,9 @@ export const signUpUser = (user, router) => {
     .then(body => {
       const slug = body.user.username
       localStorage.setItem('jwt', body.token)
-      localStorage.setItem('jwt', body.token)
-      localStorage.setItem('user_id', body.user.id)
-      localStorage.setItem('username', body.user.username)
+
+      // localStorage.setItem('user_id', body.user.id)
+      // localStorage.setItem('username', body.user.username)
       // dispatch(reset('signup'))
       dispatch(setCurrentUser(body.user))
       router.history.replace(`/welcome`)
@@ -83,24 +83,24 @@ export const signUpUser = (user, router) => {
   }
 }
 
-// export const refreshAuth = (token) => {
-//     return dispatch => {
-//     dispatch(authenticationRequest())
-//     return fetch(`${API_URL}/auth/refresh`, {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization':  `JWT ${token}`
-//       }
-//   })
-//     .then(response => response.json())
-//     .then(body => {
-//       console.log(body.user)
-//       dispatch(setCurrentUser(body.user))   
-//     })
-//     .catch(error => {
-//       error => (console.log(error))
-//       // throw new SubmissionError(error)
-//     })
-//   }
-// }
+export const refreshAuth = (token) => {
+    return dispatch => {
+    dispatch(authenticationRequest())
+    return fetch(`${API_URL}/auth/refresh`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization':  `JWT ${token}`
+      }
+  })
+    .then(response => response.json())
+    .then(body => {
+      console.log(body.user)
+      dispatch(setCurrentUser(body.user))   
+    })
+    .catch(error => {
+      error => (console.log(error))
+      // throw new SubmissionError(error)
+    })
+  }
+}

@@ -1,7 +1,7 @@
 const initialState = {
   isAuthenticated: !!localStorage.getItem('jwt') ? true : false, 
   isAuthenticating: false, 
-  currentUser: !!localStorage.getItem('jwt') ? {'id': localStorage.getItem('user_id'), 'username': localStorage.getItem('username')} : {}
+  currentUser: {}
 }
 
 // action = {type: 'AUTHENTICATION_REQUEST'}
