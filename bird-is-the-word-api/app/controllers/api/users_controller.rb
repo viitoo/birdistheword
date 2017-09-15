@@ -16,7 +16,11 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    render json: @user.attributes.merge({games: @user.games})
+    user_games = @user.games.map(&:id)
+    render json: @user.attributes.merge({games: user_games})
+  end
+
+  def games
   end
 
   private
