@@ -3,23 +3,27 @@ const API_URL = process.env.REACT_APP_API_URL
 // ACTION CREATORS
 const startGame = game => {
   return {
-    type: 'START_NEW_GAME',
+    type: 'START_GAME',
     game: game
   }
 }
 
-
 // ASYNC ACTIONS
 
-// export const getGame = () => {
-//   return dispatch => {
-//     return fetch(`${API_URL}/games`)
-//       .then(response => response.json())
-//       .then(response => response[0].board)
-//       .then(board => dispatch(setBoard(board)))
-//       .catch(error => console.log(error));
-//   } 
-// }
+export const getGame = (game_id) => {
+  return dispatch => {
+    return fetch(`${API_URL}/games/${game_id}`,{
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.jwt}`
+      }
+    })
+      .then(response => response.json())
+      .then(game => dispatch(startGame(game)))
+      .catch(error => console.log(error));
+  } 
+}
 
 export const createGame = () => {
   return dispatch => {

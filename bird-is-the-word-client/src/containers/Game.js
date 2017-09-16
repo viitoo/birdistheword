@@ -8,31 +8,38 @@ import players from '../players.json'
 import bag from '../bag.json'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { getBoard } from '../actions/board'
+import { getGame } from '../actions/game'
 
 class Game extends Component{
 
   componentDidMount(){
-      this.props.getBoard(parseInt(this.props.match.url.split("").slice(-1)))
+    const game_id = parseInt(this.props.match.url.split("").slice(-1), 10)
+    this.props.getGame(game_id)
   }
 
   render(){
-    return (
-      <div>
-        <h1>Bird Is the Word</h1>
-        <Board board={this.props.board}/>
-        <Rack players={players} bag={bag}/>
-      </div>
-    )
+    if (this.props.board){
+      return (
+        <div>
+          <h1>Bird Is the Word</h1> 
+          <Board board={this.props.board} />
+          <Rack players={players} bag={bag}/>
+        </div>
+      )
+
+    }
+    else
+      return null
+    
   }
 }
 
 const mapStateToProps = (state) => {
   return({
-    board: state.board,
+    board: state.game.board,
     tiles: state.tiles,
     // players: state.players
   })
 }
 
-export default compose(connect(mapStateToProps, {getBoard}), DragDropContext(HTML5Backend))(Game);
+export default compose(connect(mapStateToProps, {getGame}), DragDropContext(HTML5Backend))(Game);

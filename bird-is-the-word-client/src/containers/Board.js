@@ -11,6 +11,7 @@ class Board extends Component{
       return <Row row={row} x={index} key={index}/>
       }
     ) 
+    
     return(
       <table>
         <tbody>
