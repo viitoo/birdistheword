@@ -6,8 +6,8 @@ import { createGame } from '../actions/game'
 
 class User extends Component{
   render(){
-    const games = this.props.games.map(game => {
-      return <p>{game}</p>
+    const games = this.props.games.map((game, index) => {
+      return <Link to={`/game/${game}`} key={index} game_id={game}>{game}</Link>
     })
     return(
       <div>

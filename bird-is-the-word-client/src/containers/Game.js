@@ -11,8 +11,9 @@ import { connect } from 'react-redux'
 import { getBoard } from '../actions/board'
 
 class Game extends Component{
+
   componentDidMount(){
-      this.props.getBoard()
+      this.props.getBoard(parseInt(this.props.match.url.split("").slice(-1)))
   }
 
   render(){

@@ -35,9 +35,8 @@ class App extends Component{
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            
             <PrivateRoute path="/users/:username" component={() => <User games={this.props.session.games} user={this.props.session.currentUser}/>} isAuthenticating={this.props.session.isAuthenticating} isAuthenticated={this.props.session.isAuthenticated}/>
-            <Route exact path= "/users/:username/game/:id" component={Game} />
+            <Route exact path= "/game/:id" component={Game} />
           
           </ Switch>
         </Router>
