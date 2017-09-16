@@ -6,7 +6,6 @@ import User from '../components/User'
 import Signup from '../components/Signup'
 import Login from '../components/Login'
 import Game from '../containers/Game'
-import { getUserGames } from '../actions/sessionActions'
 
 
 
@@ -28,9 +27,6 @@ class App extends Component{
     if (!!token){
       this.props.refreshAuth(token)
     }
-    if (!this.props.session.currentUser){
-       this.props.getUserGames(this.props.session.currentUser)
-    }  
   }
   render(){
     return (
@@ -56,4 +52,4 @@ const mapStateToProps = state =>{
   }
 }
 
-export default connect(mapStateToProps, {refreshAuth, getUserGames})(App)
+export default connect(mapStateToProps, {refreshAuth})(App)
