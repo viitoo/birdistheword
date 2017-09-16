@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import { createGame } from '../actions/game'
 import { logOut} from '../actions/sessionActions'
 import { connect } from 'react-redux'
+import { createGame } from '../actions/game'
 
 class User extends Component{
-  componentDidMount(){
-    
-  }
   render(){
+    const games = this.props.games.map(game => {
+      return <p>{game}</p>
+    })
     return(
       <div>
         <h1>Hey {this.props.user.username}!</h1>
@@ -17,7 +17,7 @@ class User extends Component{
         <Link to={"/"}>Join an Existing Game</Link>
 
         <h1>Your games:</h1>
-        
+        {games}
       </div>
     )
   }

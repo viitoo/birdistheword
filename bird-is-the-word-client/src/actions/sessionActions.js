@@ -16,6 +16,14 @@ export const setCurrentUser = user => {
   }
 }
 
+export const setCurrentUserGames = (games, user) => {
+  return{
+    type: 'GET_USER_GAMES',
+    games,
+    user
+  }
+}
+
 export const logOut = (router) => {
   return {
     type: 'LOG_OUT'
@@ -43,7 +51,9 @@ export const logInUser = (user, router) => {
       // localStorage.setItem('user_id', body.user.id)
       // localStorage.setItem('username', body.user.username)
       dispatch(setCurrentUser(body.user))
+      dispatch(getUserGames(body.user))
       router.history.replace(`/users/${slug}`)
+
      
     })
     .catch(error => {
@@ -73,6 +83,7 @@ export const signUpUser = (user, router) => {
       // localStorage.setItem('username', body.user.username)
       // dispatch(reset('signup'))
       dispatch(setCurrentUser(body.user))
+      dispatch(getUserGames(body.user))
       router.history.replace(`/welcome`)
       
     })
@@ -96,11 +107,23 @@ export const refreshAuth = (token) => {
     .then(response => response.json())
     .then(body => {
       console.log(body.user)
-      dispatch(setCurrentUser(body.user))   
+      dispatch(setCurrentUser(body.user)) 
+      dispatch(getUserGames(body.user))  
     })
     .catch(error => {
       error => (console.log(error))
       // throw new SubmissionError(error)
     })
+  }
+}
+
+export const getUserGames = (user) => {
+  return dispatch => {
+    return fetch(`${API_URL}/users/${user.id}/games`)
+      .then(response => response.json())
+      .then (games => {
+        dispatch(setCurrentUserGames(games, user))
+      })
+      .catch(error => console.log(error))
   }
 }

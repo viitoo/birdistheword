@@ -6,11 +6,11 @@ import User from '../components/User'
 import Signup from '../components/Signup'
 import Login from '../components/Login'
 import Game from '../containers/Game'
+import { getUserGames } from '../actions/sessionActions'
 
 
 
 const PrivateRoute = ({component: Component, path, isAuthenticated, isAuthenticating}) => {
-  console.log("going to route", isAuthenticated, isAuthenticating)
   return(
     <Route path={path} render={(props) => {
       if (isAuthenticated){return <Component/>}
@@ -28,6 +28,9 @@ class App extends Component{
     if (!!token){
       this.props.refreshAuth(token)
     }
+    if (!this.props.session.currentUser){
+       this.props.getUserGames(this.props.session.currentUser)
+    }  
   }
   render(){
     return (
@@ -37,7 +40,7 @@ class App extends Component{
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={Signup} />
             
-            <PrivateRoute path="/users/:username" component={() => <User user={this.props.session.currentUser}/>} isAuthenticating={this.props.session.isAuthenticating} isAuthenticated={this.props.session.isAuthenticated}/>
+            <PrivateRoute path="/users/:username" component={() => <User games={this.props.session.games} user={this.props.session.currentUser}/>} isAuthenticating={this.props.session.isAuthenticating} isAuthenticated={this.props.session.isAuthenticated}/>
             <Route exact path= "/users/:username/game/:id" component={Game} />
           
           </ Switch>
@@ -53,4 +56,4 @@ const mapStateToProps = state =>{
   }
 }
 
-export default connect(mapStateToProps, {refreshAuth})(App)
+export default connect(mapStateToProps, {refreshAuth, getUserGames})(App)

@@ -1,7 +1,8 @@
 const initialState = {
   isAuthenticated: !!localStorage.getItem('jwt') ? true : false, 
   isAuthenticating: false, 
-  currentUser: {}
+  currentUser: {},
+  games: [],
 }
 
 // action = {type: 'AUTHENTICATION_REQUEST'}
@@ -19,16 +20,23 @@ export default (state = initialState, action) => {
     return{
       isAuthenticated: true,
       isAuthenticating: false,
-      currentUser: action.user
+      currentUser: action.user,
+      games: []
     }
   case 'LOG_OUT':
     console.log("logging out..")
     return{
       isAuthenticated: false,
       isAuthenticating: false,
-      currentUser: {}
+      currentUser: {},
+      games: []
     }
-    default:
-      return state;
+  case 'GET_USER_GAMES':
+    return{
+      ...state,
+      games: action.games
+    }
+  default:
+    return state;
   }
 }
