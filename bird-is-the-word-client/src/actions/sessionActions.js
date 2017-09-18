@@ -84,7 +84,7 @@ export const signUpUser = (user, router) => {
       // dispatch(reset('signup'))
       dispatch(setCurrentUser(body.user))
       dispatch(getUserGames(body.user))
-      router.history.replace(`/welcome`)
+      router.history.replace(`/users/${slug}`)
       
     })
     .catch(error => {

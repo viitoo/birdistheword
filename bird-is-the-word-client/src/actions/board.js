@@ -19,7 +19,6 @@ export const dropTile = (x, y, letter) => {
  
 }
 
-
 // ASYNC ACTIONS
 
 export const getBoard = () => {
