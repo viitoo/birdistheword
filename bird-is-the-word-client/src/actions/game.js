@@ -25,7 +25,7 @@ export const getGame = (game_id) => {
   } 
 }
 
-export const createGame = () => {
+export const createGame = (router) => {
   return dispatch => {
     return fetch(`${API_URL}/games`, {
       method: "POST",
@@ -37,6 +37,7 @@ export const createGame = () => {
       .then(response => response.json())
       .then(game => {
         dispatch(startGame(game))
+        router.history.replace(`/game/${game.id}`)
       })
       .catch(error => console.log(error))
   }
