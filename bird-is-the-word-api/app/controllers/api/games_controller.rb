@@ -9,7 +9,11 @@ class Api::GamesController < ApplicationController
   def create
     game = Game.new
     if game.save
-      GamePlayer.create(game_id: game.id, user_id: @user.id, player_number: 1)
+      rack = game.bag.sample(7)
+      rack.each{|tile_id| game.bag.delete tile_id }
+      game.save
+      GamePlayer.create(game_id: game.id, user_id: @user.id, player_number: 1, rack: rack)
+
       render json: game
     else
       render json: {message: "Error. Try again."}

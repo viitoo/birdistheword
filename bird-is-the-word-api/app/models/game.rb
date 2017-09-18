@@ -392,7 +392,7 @@ class Game < ApplicationRecord
       {"letter": "W", "points": 4, "x": nil, "y": nil, "id": 92},
       {"letter": "W", "points": 4, "x": nil, "y": nil, "id": 93},
 
-      {"letter":"x", "points": 8, "x": nil, "y": nil, "id": 94},
+      {"letter": "X", "points": 8, "x": nil, "y": nil, "id": 94},
 
       {"letter": "Y", "points": 4, "x": nil, "y": nil, "id": 95},
       {"letter": "W", "points": 4, "x": nil, "y": nil, "id": 96},
@@ -403,6 +403,6 @@ class Game < ApplicationRecord
       {"letter": "", "points": nil, "x": nil, "y": nil, "id": 99}
   ]
 
-  self.bag = Array(0, 99)
+    self.bag = Array(0..99)
   end
 end
