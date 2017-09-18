@@ -21,6 +21,9 @@ class Api::UsersController < ApplicationController
   end
 
   def games
+    @user = User.find(params[:user_id])
+    user_games = @user.games.map(&:id)
+    render json: user_games
   end
 
   private

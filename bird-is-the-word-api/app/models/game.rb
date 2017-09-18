@@ -402,5 +402,7 @@ class Game < ApplicationRecord
       {"letter": "", "points": nil, "x": nil, "y": nil, "id": 98},
       {"letter": "", "points": nil, "x": nil, "y": nil, "id": 99}
   ]
+
+  self.bag = Array(0, 99)
   end
 end

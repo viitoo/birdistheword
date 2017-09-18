@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :users do
+    resources :users, except: [:new, :edit] do
       get '/games', to: "users#games"
     end
     post '/auth', to: "auth#login"
