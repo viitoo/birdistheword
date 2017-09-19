@@ -21,7 +21,8 @@ class Api::GamesController < ApplicationController
   end
 
   def show
-    render json: @game
+    current_user_rack = GamePlayer.find_by(user_id: @user.id, game_id: @game.id).rack
+    render json: @game.attributes.merge({current_user_rack: current_user_rack})
   end
 
   def update
