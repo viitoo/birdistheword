@@ -11,6 +11,18 @@ class Api::GamesController < ApplicationController
     if game.save
       rack = game.bag.sample(7)
       rack.each{|tile_id| game.bag.delete tile_id }
+
+      counter = 100
+
+      # rack.each do |tile_id| 
+      #   
+      
+      #   tile[0]["x"] = 1
+      #   tile[0]["y"] = counter
+      #   counter += 1
+      # end
+
+
       game.save
       GamePlayer.create(game_id: game.id, user_id: @user.id, player_number: 1, rack: rack)
 
