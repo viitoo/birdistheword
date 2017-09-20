@@ -14,13 +14,12 @@ class Api::GamesController < ApplicationController
 
       counter = 100
 
-      # rack.each do |tile_id| 
-      #   
-      
-      #   tile[0]["x"] = 1
-      #   tile[0]["y"] = counter
-      #   counter += 1
-      # end
+      rack.each do |tile_id| 
+        tile = game.tiles.select{|tile| tile["id"] == tile_id.to_i }
+        tile[0]["x"] = 1
+        tile[0]["y"] = counter
+        counter += 1
+      end
 
 
       game.save
