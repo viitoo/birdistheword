@@ -14,6 +14,8 @@ const Rack = (props) => {
       return tile.id === tile_id
     }
     var tile = props.tiles.find(findTile);
+    
+
       return <Square square={{"color": "white"}} x={1} y={index+100} />
   })
   

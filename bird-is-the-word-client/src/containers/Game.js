@@ -20,7 +20,7 @@ class Game extends Component{
       return (
         <div>
           <h1>Bird Is the Word</h1> 
-          <Board board={this.props.board} />
+          <Board board={this.props.board} tiles={this.props.tiles} />
           <Rack tiles={this.props.tiles} rack={this.props.rack}/>
         </div>
       )

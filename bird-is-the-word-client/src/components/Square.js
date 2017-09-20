@@ -21,8 +21,10 @@ class Square extends Component{
 
 
   renderTile(x, y){
+    debugger
 
     function findTile(tile){
+
       return tile.x === x && tile.y === y
     }
     var tile = this.props.tiles.find(findTile);
@@ -34,7 +36,6 @@ class Square extends Component{
   }
 
   render(){
-    // console.log(this.props.getItem)
     const {connectDropTarget} = this.props
     
     return connectDropTarget(
@@ -47,7 +48,7 @@ class Square extends Component{
 
 const mapStateToProps = (state) => {
   return({
-    tiles: state.tiles
+    tiles: state.game.tiles
   })
 }
 export default compose(connect(mapStateToProps), DropTarget(ItemTypes.TILE, squareTarget, collect))(Square);
