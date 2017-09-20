@@ -4,8 +4,6 @@ import Board from './Board'
 import Rack from './Rack'
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import players from '../players.json'
-import bag from '../bag.json'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { getGame } from '../actions/game'
@@ -13,7 +11,6 @@ import { getGame } from '../actions/game'
 class Game extends Component{
 
   componentDidMount(){
-    debugger
     const game_id = parseInt(this.props.match.url.split("/")[2], 10)
     this.props.getGame(game_id)
   }
@@ -24,7 +21,7 @@ class Game extends Component{
         <div>
           <h1>Bird Is the Word</h1> 
           <Board board={this.props.board} />
-          <Rack players={players} bag={bag}/>
+          <Rack tiles={this.props.tiles} rack={this.props.rack}/>
         </div>
       )
 
@@ -38,8 +35,8 @@ class Game extends Component{
 const mapStateToProps = (state) => {
   return({
     board: state.game.board,
-    tiles: state.tiles,
-    // players: state.players
+    tiles: state.game.tiles,
+    rack: state.game.current_user_rack
   })
 }
 

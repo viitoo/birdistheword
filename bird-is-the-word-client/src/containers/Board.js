@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Row from '../components/Row'
-import { connect } from 'react-redux'
 
 
 class Board extends Component{

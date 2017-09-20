@@ -1,4 +1,3 @@
-import bag from '../bag.json'
 
 export default (state = {}, action) => {
   switch(action.type){

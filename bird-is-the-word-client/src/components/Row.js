@@ -1,6 +1,5 @@
 import React from 'react';
 import Square from './Square'
-import Tile from './Tile'
 
 const Row = (props) => {
   const squares = props.row.map((square, index)=> {

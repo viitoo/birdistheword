@@ -1,32 +1,29 @@
 import React from 'react';
 import Tile from '../components/Tile'
-import players from '../players.json'
+
+
+
 const Rack = (props) => {
-  
-  // const rack = props.players.players[0].rack.map(id => {
-  //     function findPlayerTiles(tile){
-  //       return tile.id === id
-  //     }
+ 
+  const rack = props.rack.map(id =>{
 
-  //   const bag = props.bag.find(findPlayerTiles);
-  //   }
-  // )
+    const tile_id = parseInt(id)
 
-
-  // function findPlayerTiles(tile){
-  //   return tile.player === "1"
-  // }
-
-  // const bag = props.bag.find(findPlayerTiles);
-  const bag = props.bag.map((tile, index) => {
-      return <Tile letter={tile.letter} x={tile.x} y={tile.y} id={index} points={tile.points}/>
+    function findTile(tile){
+      return tile.id === tile_id
     }
-  )
+    var tile = props.tiles.find(findTile);
+      return <Tile x={tile.x} y={tile.y} letter = {tile.letter} id={tile.id} points={tile.points} />
+  })
+  
+    
+
   return(
     <div>
-      {bag}
+     {rack}
     </div>
   )  
+ 
 }
 
 export default Rack;

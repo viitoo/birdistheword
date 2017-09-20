@@ -7,7 +7,6 @@ import Tile from './Tile'
 
 const squareTarget = {
   drop(props, monitor, component){
-    const tile = monitor.getItem()
     return {x: props.x, y: props.y}
   }
 }
