@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { ItemTypes } from '../Constants';
-import { updateTilePosition } from '../actions/game'
+import { updateTilePosition } from '../actions/tiles'
 import { DragSource } from 'react-dnd'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
