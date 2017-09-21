@@ -4,8 +4,12 @@ import { DropTarget } from 'react-dnd'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import Tile from './Tile'
+import { canDropTile } from '../helpers.js'
 
 const squareTarget = {
+  canDrop(props){
+    return canDropTile(props.x, props.y, props.tiles)
+  },
   drop(props, monitor, component){
     return {x: props.x, y: props.y}
   }
@@ -14,6 +18,7 @@ const squareTarget = {
 function collect(connect, monitor){
   return {
     connectDropTarget: connect.dropTarget(),
+    canDrop: monitor.canDrop()
   }
 }
 
@@ -21,7 +26,6 @@ class Square extends Component{
 
 
   renderTile(x, y){
-    debugger
 
     function findTile(tile){
 
@@ -39,7 +43,8 @@ class Square extends Component{
     const {connectDropTarget} = this.props
     
     return connectDropTarget(
-        <td className={"square " + this.props.square.color}>{this.props.square.value}
+
+        <td className={"square " + this.props.square.color}>
         {this.renderTile(this.props.x, this.props.y, this.props.id, this.props.points)}
         </td>
     )

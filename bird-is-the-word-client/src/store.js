@@ -5,16 +5,12 @@ import {
 } from 'redux'
 
 import ReduxThunk from 'redux-thunk'
-import board from './reducers/board'
-import tiles from './reducers/tiles'
 import game from './reducers/game'
 import session from'./reducers/session'
 
 const reducers = combineReducers({
   session: session,
   game: game,
-  board: board,
-  tiles: tiles
 })
 
 
