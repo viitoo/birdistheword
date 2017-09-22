@@ -10,15 +10,6 @@ class User extends Component{
     router: PropTypes.object
   }
 
-  constructor(props){
-    super(props);
-    this.newGame = this.newGame.bind(this);
-  }
-
-   newGame(){
-      this.props.createGame(this.context.router)
-    }
-
   render(){
     const games = this.props.games.map((game, index) => {
       return <Link to={`/game/${game}`} key={index}>{game}</Link>
@@ -27,7 +18,7 @@ class User extends Component{
       <div>
         <h1>Hey {this.props.user.username}!</h1>
         <button onClick={ this.props.logOut}>Log out</button>
-        <button onClick={this.newGame}>Start New Game</button><br />
+        <button onClick={() => this.props.createGame(this.context.router)}>Start New Game</button><br />
         <Link to={"/"}>Join an Existing Game</Link>
 
         <h1>Your games:</h1>

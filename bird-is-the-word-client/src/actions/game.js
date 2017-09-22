@@ -8,6 +8,7 @@ const startGame = game => {
   }
 }
 
+
 // ASYNC ACTIONS
 
 export const getGame = (game_id) => {
@@ -43,4 +44,16 @@ export const createGame = (router) => {
   }
 }
 
-
+export const submitWord = (game_id, game_tiles) => {
+  return dispatch => {
+    return fetch(`${API_URL}/games/${game_id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.jwt}`
+      },
+      body: JSON.stringify({game: {tiles: game_tiles}})
+      //body: JSON.stringify({game: {tiles: []}})
+    })
+  }
+}
