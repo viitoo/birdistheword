@@ -59,6 +59,6 @@ class Api::GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:board, :bag, :tiles)
+    params.require(:game).permit(tiles: [:letter, :points, :x, :y, :id])
   end
 end
