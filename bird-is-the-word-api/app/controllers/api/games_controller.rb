@@ -25,7 +25,8 @@ class Api::GamesController < ApplicationController
       game.save
       GamePlayer.create(game_id: game.id, user_id: @user.id, player_number: 1, rack: rack)
 
-      render json: game
+      current_user_rack = GamePlayer.find_by(user_id: @user.id, game_id: game.id).rack
+      render json: game.attributes.merge({current_user_rack: current_user_rack})
     else
       render json: {message: "Error. Try again."}
     end
