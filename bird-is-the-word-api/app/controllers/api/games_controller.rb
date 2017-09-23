@@ -21,12 +21,13 @@ class Api::GamesController < ApplicationController
         counter += 1
       end
 
-
       game.save
       GamePlayer.create(game_id: game.id, user_id: @user.id, player_number: 1, rack: rack)
 
+      players = game.players
       current_user_rack = GamePlayer.find_by(user_id: @user.id, game_id: game.id).rack
-      render json: game.attributes.merge({current_user_rack: current_user_rack})
+      render json: game.attributes.merge({current_user_rack: current_user_rack, players: players})
+
     else
       render json: {message: "Error. Try again."}
     end
@@ -34,7 +35,8 @@ class Api::GamesController < ApplicationController
 
   def show
     current_user_rack = GamePlayer.find_by(user_id: @user.id, game_id: @game.id).rack
-    render json: @game.attributes.merge({current_user_rack: current_user_rack})
+    players = @game.players
+    render json: @game.attributes.merge({current_user_rack: current_user_rack, players: players})
   end
 
   def update
@@ -53,6 +55,10 @@ class Api::GamesController < ApplicationController
     end
   end
 
+  def available_games
+    available_games = Game.all.select{|game| game.players.length == 1 && game.players[0].id != @user.id}
+    render json: available_games
+  end
   private
 
   def set_game
