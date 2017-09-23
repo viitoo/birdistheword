@@ -8,7 +8,6 @@ import Login from '../components/Login'
 import Game from '../containers/Game'
 
 
-
 const PrivateRoute = ({component: Component, path, isAuthenticated, isAuthenticating}) => {
   return(
     <Route path={path} render={(props) => {
@@ -35,7 +34,7 @@ class App extends Component{
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <PrivateRoute path="/users/:username" component={() => <User games={this.props.session.games} user={this.props.session.currentUser}/>} isAuthenticating={this.props.session.isAuthenticating} isAuthenticated={this.props.session.isAuthenticated}/>
+            <PrivateRoute path="/users/:username" component={User} isAuthenticating={this.props.session.isAuthenticating} isAuthenticated={this.props.session.isAuthenticated}/>
             <Route exact path= "/game/:id" component={Game} />
           
           </ Switch>
@@ -45,9 +44,11 @@ class App extends Component{
   }
 }
 
+
 const mapStateToProps = state =>{
   return{
-    session: state.session
+    session: state.session,
+    available_games: state.available_games
   }
 }
 

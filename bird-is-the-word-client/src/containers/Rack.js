@@ -5,7 +5,6 @@ import Square from '../components/Square'
 
 
 const Rack = (props) => {
- 
   const rack = props.rack.map((id, index)=>{
 
     const tile_id = parseInt(id)

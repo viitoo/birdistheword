@@ -14,8 +14,9 @@ import { submitWord } from '../actions/game'
 class Game extends Component{
 
   componentDidMount(){
-    const game_id = parseInt(this.props.match.url.split("/")[2], 10)
-    this.props.getGame(game_id)
+      const game_id = parseInt(this.props.match.url.split("/")[2], 10)
+      this.props.getGame(game_id)
+    
   }
 
   render(){

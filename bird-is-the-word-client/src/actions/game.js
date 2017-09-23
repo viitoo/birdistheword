@@ -8,6 +8,12 @@ const startGame = game => {
   }
 }
 
+const setAvailableGames = games =>{
+  return {
+    type: 'GET_AVAILABLE_GAMES',
+    games: games
+  }
+}
 
 // ASYNC ACTIONS
 
@@ -54,6 +60,25 @@ export const submitWord = (game_id, game_tiles) => {
       },
       body: JSON.stringify({game: {tiles: game_tiles}})
       //body: JSON.stringify({game: {tiles: []}})
+    })
+  }
+}
+
+export const getAvailableGames = () =>
+{
+  return dispatch => {
+    return fetch(`${API_URL}/available_games`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.jwt}`
+      }
+    })
+  
+    .then(response => response.json())
+    .then(games => {
+      dispatch(setAvailableGames(games))
+      console.log(games)
     })
   }
 }
