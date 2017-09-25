@@ -21,7 +21,6 @@ class Api::GamesController < ApplicationController
         counter += 1
       end
 
-      game.save
       GamePlayer.create(game_id: game.id, user_id: @user.id, player_number: 1, rack: rack)
 
       players = game.players
@@ -47,7 +46,8 @@ class Api::GamesController < ApplicationController
         tile[0]["y"] = counter
         counter += 1
       end
-      GamePlayer.create(user_id: @user.id, game_id: @game.id, rack: rack)
+
+      GamePlayer.create(user_id: @user.id, game_id: @game.id, rack: rack, player_number: 2)
     end
     current_user_rack = GamePlayer.find_by(user_id: @user.id, game_id: @game.id).rack
     players = @game.players
@@ -56,8 +56,41 @@ class Api::GamesController < ApplicationController
 
   def update
     if @game.update(game_params)
-      #renew user's rack
-      render json: @game
+      
+      #update user rack to the current state
+      
+      leftover_rack = []
+      counter = 100
+      7.times do
+        tile = @game.tiles.find{|tile| tile["y"] == counter}
+         if !!tile
+           leftover_rack << tile["id"]
+         end 
+         counter +=1
+      end
+      game_player = GamePlayer.find_by(user_id: @user.id, game_id: @game.id)
+      game_player.rack = leftover_rack
+      game_player.save
+
+      #replenish the rack 
+      missing_tiles_amount = 7 - game_player.rack.length
+      new_tile_ids = @game.bag.sample(missing_tiles_amount)
+      new_tile_ids.each{|tile_id| @game.bag.delete tile_id }
+      game_player.rack += new_tile_ids
+      game_player.save
+
+      tile_counter = 100
+
+      game_player.rack.each do |tile_id| 
+        tile = @game.tiles.select{|tile| tile["id"] == tile_id.to_i }
+        tile[0]["x"] = 1
+        tile[0]["y"] = tile_counter
+        tile_counter += 1
+        puts tile_counter
+      end
+      @game.save
+
+      render json: @game.attributes.merge({current_user_rack: game_player.rack})
     else
       render json: {message: "Error. Try again."}
     end
