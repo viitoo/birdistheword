@@ -25,10 +25,11 @@ export const setCurrentUserGames = (games, user) => {
 }
 
 export const logOut = (router) => {
+  router.history.replace('/')
+  localStorage.clear()
   return {
     type: 'LOG_OUT'
   }
-  router.history.replace('/')
 }
 
 /* Async Actions*/

@@ -30,7 +30,7 @@ class User extends Component{
     const available_games = this.props.available_games.map((game, index) => {
       return (
         <ul>
-          <li><Link to={`/game/${game}`} key={index}>{game.id}</Link></li>
+          <li><Link to={`/game/${game.id}`} key={index}>{game.id}</Link></li>
         </ul>
       )
     })
@@ -39,7 +39,7 @@ class User extends Component{
     return(
       <div>
         <h1>Hey {this.props.user.username}!</h1>
-        <button onClick={ this.props.logOut}>Log out</button>
+        <button onClick={() => this.props.logOut(this.context.router)}>Log out</button>
         <button onClick={() => this.props.createGame(this.context.router)}>Start New Game</button><br />
         <h1>Join an Existing Game</h1>
           {available_games}

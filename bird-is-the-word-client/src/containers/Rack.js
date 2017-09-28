@@ -14,8 +14,10 @@ const Rack = (props) => {
     }
     var tile = props.tiles.find(findTile);
     
-
+      //if player 1
       return <Square square={{"color": "white"}} x={1} y={index+100} />
+      //if player 2
+      return <Square square={{"color": "white"}} x={1} y={index+200} />
   })
   
     
