@@ -33,6 +33,18 @@ class Api::GamesController < ApplicationController
   end
 
   def show
+
+    #remove rack tiles coordinates
+    @game.tiles.map!  do |tile|
+    if tile["y"] && tile["y"] >= 100
+      tile["y"] = nil
+      tile["x"] = nil
+    end
+    tile
+    end
+
+    @game.save
+    binding.pry
     #create new GamePlayer if Player 2 is joining this game
     if !GamePlayer.find_by(user_id: @user.id, game_id: @game.id)
       rack = @game.bag.sample(7)
@@ -40,15 +52,21 @@ class Api::GamesController < ApplicationController
 
       counter = 100
 
-      rack.each do |tile_id| 
+      
+      GamePlayer.create(user_id: @user.id, game_id: @game.id, rack: rack, player_number: 2)
+    else
+      game_player = GamePlayer.find_by(user_id: @user.id, game_id: @game.id)
+      rack = game_player.rack
+    end
+    counter = 100
+    rack.each do |tile_id| 
         tile = @game.tiles.select{|tile| tile["id"] == tile_id.to_i }
         tile[0]["x"] = 1
         tile[0]["y"] = counter
         counter += 1
-      end
-
-      GamePlayer.create(user_id: @user.id, game_id: @game.id, rack: rack, player_number: 2)
     end
+    @game.save
+
     current_user_rack = GamePlayer.find_by(user_id: @user.id, game_id: @game.id).rack
     players = @game.players
     render json: @game.attributes.merge({current_user_rack: current_user_rack, players: players})
