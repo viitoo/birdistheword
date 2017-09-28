@@ -25,7 +25,6 @@ class User extends Component{
         </ul>
       )
     })
-    console.log(this.props.available_games)
 
     const available_games = this.props.available_games.map((game, index) => {
       return (

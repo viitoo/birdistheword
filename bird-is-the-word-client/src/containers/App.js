@@ -20,6 +20,23 @@ const PrivateRoute = ({component: Component, path, isAuthenticated, isAuthentica
   )
 } 
 
+const RedirectAuthenticated = ({component: Component, path, isAuthenticated, currentUser}) => {
+  return(
+    <Route path={path} render={(props) =>{
+      debugger
+      if(isAuthenticated && Object.keys(currentUser).length !== 0){
+        return <Redirect to={{pathname: `/users/${currentUser.username}`}} />
+      }
+      else {
+        return <Component />
+      }
+    }}
+    />
+
+  )
+}
+
+
 class App extends Component{
   componentDidMount(){
     const token = localStorage.getItem('jwt')
@@ -32,9 +49,9 @@ class App extends Component{
       <div>
         <Router>
           <Switch>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <PrivateRoute path="/users/:username" component={User} isAuthenticating={this.props.session.isAuthenticating} isAuthenticated={this.props.session.isAuthenticated}/>
+            <RedirectAuthenticated exact path="/" component={Login} isAuthenticated={this.props.session.isAuthenticated} currentUser={this.props.currentUser}/>
+            <RedirectAuthenticated exact path="/signup" component={Signup} isAuthenticated={this.props.session.isAuthenticated} currentUser={this.props.currentUser}/>
+            <PrivateRoute exact path="/users/:username" component={User} isAuthenticating={this.props.session.isAuthenticating} isAuthenticated={this.props.session.isAuthenticated}/>
             <Route exact path= "/game/:id" component={Game} />
           
           </ Switch>
@@ -48,6 +65,7 @@ class App extends Component{
 const mapStateToProps = state =>{
   return{
     session: state.session,
+    currentUser: state.session.currentUser,
     available_games: state.available_games
   }
 }
