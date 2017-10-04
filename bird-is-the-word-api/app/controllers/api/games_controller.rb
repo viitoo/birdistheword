@@ -44,7 +44,6 @@ class Api::GamesController < ApplicationController
     end
 
     @game.save
-    binding.pry
     #create new GamePlayer if Player 2 is joining this game
     if !GamePlayer.find_by(user_id: @user.id, game_id: @game.id)
       rack = @game.bag.sample(7)
