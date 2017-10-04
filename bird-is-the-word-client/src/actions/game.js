@@ -59,9 +59,14 @@ export const submitWord = (game_id, game_tiles) => {
         'Authorization': `Bearer ${localStorage.jwt}`
       },
       body: JSON.stringify({game: {tiles: game_tiles}})
-      //body: JSON.stringify({game: {tiles: []}})
     })
+    .then(response => response.json())
+    .then(game => {
+      dispatch(startGame(game))
+    })
+     .catch(error => console.log(error))
   }
+   
 }
 
 export const getAvailableGames = () =>

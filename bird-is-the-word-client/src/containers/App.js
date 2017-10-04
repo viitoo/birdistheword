@@ -23,7 +23,6 @@ const PrivateRoute = ({component: Component, path, isAuthenticated, isAuthentica
 const RedirectAuthenticated = ({component: Component, path, isAuthenticated, currentUser}) => {
   return(
     <Route path={path} render={(props) =>{
-      debugger
       if(isAuthenticated && Object.keys(currentUser).length !== 0){
         return <Redirect to={{pathname: `/users/${currentUser.username}`}} />
       }
