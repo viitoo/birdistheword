@@ -57,6 +57,7 @@ class Api::GamesController < ApplicationController
       game_player = GamePlayer.find_by(user_id: @user.id, game_id: @game.id)
       rack = game_player.rack
     end
+    #set rack coordinates
     counter = 100
     rack.each do |tile_id| 
         tile = @game.tiles.select{|tile| tile["id"] == tile_id.to_i }
@@ -72,10 +73,25 @@ class Api::GamesController < ApplicationController
   end
 
   def update
+    #compare params["game"]["tiles"] with @game.tiles
+    #get an array of ids of played tiles
+    #for each tile in that array set draggable to false
+    #SCORING: for each tile in that array check up down left and right and see if it forms the word, continue up in each direction
+    
+    played_tiles = game_params.to_h[:tiles] - @game.tiles
+    played_tiles_ids = played_tiles.map{|tile| tile["id"]}
+
+   
+    
+
     if @game.update(game_params)
-      
-      #update user rack to the current state
-      
+      #disable drag for all played tiles
+      played_tiles_ids.map do |id|
+        @game.tiles[id]["draggable"] = false
+        @game.save
+      end
+
+    #get leftover rack
       leftover_rack = []
       counter = 100
       7.times do
@@ -98,6 +114,7 @@ class Api::GamesController < ApplicationController
 
       tile_counter = 100
 
+      #set rack coordinates
       game_player.rack.each do |tile_id| 
         tile = @game.tiles.select{|tile| tile["id"] == tile_id.to_i }
         tile[0]["x"] = 1
@@ -132,6 +149,6 @@ class Api::GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(tiles: [:letter, :points, :x, :y, :id])
+    params.require(:game).permit(tiles: [:letter, :points, :x, :y, :id, :draggable])
   end
 end
