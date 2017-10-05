@@ -124,6 +124,10 @@ class Api::GamesController < ApplicationController
       end
       @game.save
 
+      #change turn
+      @game.turn += 1
+      @game.save
+
       render json: @game.attributes.merge({current_user_rack: game_player.rack})
     else
       render json: {message: "Error. Try again."}
