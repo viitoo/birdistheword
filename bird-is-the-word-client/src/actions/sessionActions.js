@@ -57,10 +57,9 @@ export const logInUser = (user, router) => {
 
      
     })
-    .catch(error => {
-      error => (console.log(error))
+    .catch(error => console.log(error)
       // throw new SubmissionError(error)
-    })
+    )
   }
 }
 
@@ -88,10 +87,9 @@ export const signUpUser = (user, router) => {
       router.history.replace(`/users/${slug}`)
       
     })
-    .catch(error => {
-      error => (console.log(error))
+    .catch(error => console.log(error)
       // throw new SubmissionError(error)
-    })
+    )
   }
 }
 
@@ -111,10 +109,9 @@ export const refreshAuth = (token) => {
       dispatch(setCurrentUser(body.user)) 
       dispatch(getUserGames(body.user))  
     })
-    .catch(error => {
-      error => (console.log(error))
+    .catch(error => console.log(error)
       // throw new SubmissionError(error)
-    })
+    )
   }
 }
 

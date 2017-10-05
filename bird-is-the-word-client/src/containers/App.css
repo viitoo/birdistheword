@@ -39,13 +39,5 @@ body {
   line-height: 39px;
 }
 
-.points{
-  
-}
 
-table{
-    border: 1px solid black;
-    table-layout: fixed;
-    width: 600px;
-    height: 600px;
-}
+
