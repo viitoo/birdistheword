@@ -19,18 +19,22 @@ const tileSource = {
     else{
       props.updateTilePosition(props.id, drop.x, drop.y)
     }
-    
-  }
+  },
+   canDrag(props){
+     return props.draggable ? true : false
+    }
 }
 
 function collect(connect, monitor){
   return {
     connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
+    isDragging: monitor.isDragging(),
+    canDrag: monitor.canDrag()
   }
 }
 
 class Tile extends Component{
+
   render(){
     const { connectDragSource, isDragging } = this.props;
     return connectDragSource(
