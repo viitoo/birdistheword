@@ -50,6 +50,7 @@ export const createGame = (router) => {
   }
 }
 
+
 export const submitWord = (game_id, game_tiles) => {
   return dispatch => {
     return fetch(`${API_URL}/games/${game_id}`, {

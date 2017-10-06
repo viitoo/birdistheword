@@ -57,7 +57,9 @@ export const logInUser = (user, router) => {
 
      
     })
-    .catch(error => console.log(error)
+     .catch(error => {
+      error =>(console.log(error))
+      }
       // throw new SubmissionError(error)
     )
   }
@@ -78,16 +80,14 @@ export const signUpUser = (user, router) => {
     .then(body => {
       const slug = body.user.username
       localStorage.setItem('jwt', body.token)
-
-      // localStorage.setItem('user_id', body.user.id)
-      // localStorage.setItem('username', body.user.username)
-      // dispatch(reset('signup'))
       dispatch(setCurrentUser(body.user))
       dispatch(getUserGames(body.user))
       router.history.replace(`/users/${slug}`)
       
     })
-    .catch(error => console.log(error)
+     .catch(error => {
+      error =>(console.log(error))
+      }
       // throw new SubmissionError(error)
     )
   }
@@ -109,7 +109,9 @@ export const refreshAuth = (token) => {
       dispatch(setCurrentUser(body.user)) 
       dispatch(getUserGames(body.user))  
     })
-    .catch(error => console.log(error)
+    .catch(error => {
+      error =>(console.log(error))
+      }
       // throw new SubmissionError(error)
     )
   }
@@ -122,6 +124,10 @@ export const getUserGames = (user) => {
       .then (games => {
         dispatch(setCurrentUserGames(games, user))
       })
-      .catch(error => console.log(error))
+       .catch(error => {
+      error =>(console.log(error))
+      }
+      // throw new SubmissionError(error)
+    )
   }
 }

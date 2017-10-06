@@ -18,13 +18,16 @@ const Rack = (props) => {
     
 
   return(
-     <table>
-      <tbody>
-        <tr>
-          {rack}  
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <p>Your rack</p>
+      <table>
+        <tbody>
+          <tr>
+            {rack}  
+          </tr>
+        </tbody>
+      </table>
+    </div>
     
   )  
  
