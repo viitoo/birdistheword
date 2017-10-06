@@ -127,8 +127,10 @@ class Api::GamesController < ApplicationController
       #change turn
       @game.turn += 1
       @game.save
-
-      render json: @game.attributes.merge({current_user_rack: game_player.rack})
+      puts @game.turn
+      puts "incremented"
+      players = @game.players
+      render json: @game.attributes.merge({current_user_rack: game_player.rack, players: players})
     else
       render json: {message: "Error. Try again."}
     end
