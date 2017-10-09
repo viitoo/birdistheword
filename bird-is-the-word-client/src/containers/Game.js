@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import './App.css'
 import Board from './Board'
 import Rack from './Rack'
+import { Link } from 'react-router-dom';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { compose } from 'redux'
@@ -22,16 +23,31 @@ class Game extends Component{
       return (
         <div>
           <h1>Bird Is the Word</h1> 
+          <Link to={`/users/${this.props.currentUser.username}`}>⬅ Back to Dashboard</Link>
           <Board board={this.props.board} tiles={this.props.tiles} />
           <Rack tiles={this.props.tiles} rack={this.props.rack}/>
           <button onClick={() => {
-            if(this.props.game.turn % 2 === 0 && this.props.game.players.slice(-1)[0].id === this.props.currentUser.id){
-              alert("Please wait for player 2 to take their turn!")
-            } else if (this.props.game.turn % 2 !== 0 && this.props.game.players.length === 2 && this.props.game.players.slice(0, 1)[0].id === this.props.currentUser.id){
-              alert("Please wait for player 1 to tke their turn!")
-            } else {
-              this.props.submitWord(this.props.game.id, this.props.tiles)}
+            if (this.props.game.players.length === 2 &&this.props.game.turn % 2 !== 0 && this.props.game.players.slice(-1)[0].id === this.props.currentUser.id){
+                console.log(2)
+                alert("Please wait for player 1 to take their turn!")
+                this.props.getGame(this.props.game.id)   
+              }
+            else if (this.props.game.players.length === 2 && this.props.game.turn % 2 === 0 && this.props.game.players.slice(0, 1)[0].id === this.props.currentUser.id){
+                alert("Please wait for player 2 to take their turn!")
+                this.props.getGame(this.props.game.id)   
+              }
+            else if (this.props.game.players.length === 1 && this.props.game.turn % 2 === 0){
+               console.log(3)
+              alert("Please wait for player 2 to joing the game and take their turn!")
+              this.props.getGame(this.props.game.id)   
+            } 
+
+            else {
+              console.log(4)
+              debugger
+              this.props.submitWord(this.props.game.id, this.props.tiles)
             }
+          }
           }>WORD!</button>
         </div>
       )
