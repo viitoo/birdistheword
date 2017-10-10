@@ -21,6 +21,8 @@ class Api::GamesController < ApplicationController
         counter += 1
       end
 
+      game.save
+
       GamePlayer.create(game_id: game.id, user_id: @user.id, player_number: 1, rack: rack)
 
       players = game.players
@@ -122,15 +124,103 @@ class Api::GamesController < ApplicationController
         tile_counter += 1
         puts tile_counter
       end
-      @game.save
-
       #change turn
       @game.turn += 1
       @game.save
-      puts @game.turn
-      puts "incremented"
       players = @game.players
       render json: @game.attributes.merge({current_user_rack: game_player.rack, players: players})
+
+
+
+      #SCORING
+      # FIRST WORD
+      word_multiplier = 1
+      score = 0
+      played_tiles.each do |tile| 
+        #get multipliers
+        # x = tile["x"]
+        # y = tile["y"]
+        # letter_multiplier = @game.board[x][y]["letter"]
+        # if @game.board[x][y]["word"] > 1
+        #   word_multiplier = @game.board[x][y]["word"]
+        # end 
+        # score += tile["points"] * letter_multiplier
+
+
+        # DETERMINE IF WORD IS VERTICAL OR HORIZONTAL
+       
+        #vertical word
+          
+          word = [tile]
+          #check up 
+          counter = 1
+          loop do 
+            next_tile = @game.tiles.select{|t| t["x"] == tile["x"] && t["y"] == tile["y"] + counter }
+            if next_tile == [] then
+              break
+            end
+            word << next_tile
+            counter+=1 
+          end
+          #check down
+          counter = 1
+          loop do 
+            next_tile = @game.tiles.select{|t| t["x"] == tile["x"] && t["y"] == tile["y"] - counter } 
+            if next_tile == [] then
+              break
+            end
+            word << next_tile
+            counter +=1
+          end
+
+          puts word
+
+
+        #horizontal word
+        word = [tile]
+          #check left
+          counter = 1
+          loop do 
+            next_tile = @game.tiles.select{|t| t["x"] == tile["x"] + counter && t["y"] == tile["y"]  } 
+            if next_tile == [] then
+              break
+            end
+            word << next_tile
+            counter +=1
+          end
+           #check right
+          counter = 1
+          loop do 
+            next_tile = @game.tiles.select{|t| t["x"] == tile["x"] - counter  && t["y"] == tile["y"] } 
+            if next_tile == [] then
+              break
+            end
+            word << next_tile
+            counter +=1 
+          end
+
+          puts word
+         
+         
+
+      end
+      # score = score * word_multiplier
+      # puts "Your first word scored", score, "points!!!!"
+
+
+      # for each played_tiles
+        # tile.points
+
+        # board[tile.x][tile.y].letter
+        # board[tile.x][tile.y].word
+        #words formed: tile where x = tile.x+1 y= tile.y
+          #tile where x = tile.x y= tile.y + 1
+          #tile where x = tile.x - 1 y= tile.y
+          #tile where x = tile.x y= tile.y - 1
+
+
+
+
     else
       render json: {message: "Error. Try again."}
     end
