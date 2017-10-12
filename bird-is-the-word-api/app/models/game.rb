@@ -399,8 +399,8 @@ class Game < ApplicationRecord
 
       {"letter": "Z", "points": 10, "x": nil, "y": nil, "draggable": true, "id": 97},
 
-      {"letter": "", "points": "", "x": nil, "y": nil, "draggable": true, "id": 98},
-      {"letter": "", "points": "", "x": nil, "y": nil, "draggable": true, "id": 99}
+      {"letter": "", "points": 0, "x": nil, "y": nil, "draggable": true, "id": 98},
+      {"letter": "", "points": 0, "x": nil, "y": nil, "draggable": true, "id": 99}
 ]
 
     self.bag = Array(0..99)

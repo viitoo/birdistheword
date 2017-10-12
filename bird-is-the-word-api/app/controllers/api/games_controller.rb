@@ -140,6 +140,8 @@ class Api::GamesController < ApplicationController
       # FIRST WORD
       
       score = 0
+      # set word direction to horisontal
+      horisontal = true
       ############## CHECK IF THE WORD IS VERTICAL OR HORIZONTAL #############
 
       #IF THE WORD IS HORIZONTAL
@@ -202,6 +204,7 @@ class Api::GamesController < ApplicationController
       #IF WORD IS VERTICAL
         
       elsif played_tiles.all?{|tile| tile["y"] == played_tiles.first["y"]}
+        horisontal = false
         puts "word is vertical"
         sorted_tiles  = played_tiles.sort_by { |tile| tile["x"] }
 
@@ -210,11 +213,9 @@ class Api::GamesController < ApplicationController
         # select first vertical played tile
         tile = sorted_tiles.first
         score = tile["points"] * @game.board[tile["x"]][tile["y"]]["letter"]
-        binding.pry
         if @game.board[tile["x"]][tile["y"]]["word"] > 1
           word_multiplier == 1 ? word_multiplier = @game.board[tile["x"]][tile["y"]]["word"] : word_multiplier += @game.board[tile["x"]][tile["y"]]["word"]
         end
-        puts "score is", score
         word_tiles << tile
         counter = 1
         loop do
@@ -228,11 +229,9 @@ class Api::GamesController < ApplicationController
             if @game.board[next_tile["x"]][next_tile["y"]]["word"] > 1
               word_multiplier == 1 ? word_multiplier = @game.board[next_tile["x"]][next_tile["y"]]["word"] : word_multiplier += @game.board[next_tile["x"]][next_tile["y"]]["word"]
             end
-             puts "score is", score
           else
             #else just add tile's points without multiplier
             score += next_tile["points"]
-             puts "score is", score
           end
           word_tiles << next_tile
           counter += 1
@@ -249,11 +248,9 @@ class Api::GamesController < ApplicationController
             if @game.board[next_tile["x"]][next_tile["y"]]["word"] > 1
               word_multiplier == 1 ? word_multiplier = @game.board[next_tile["x"]][next_tile["y"]]["word"] : word_multiplier += @game.board[next_tile["x"]][next_tile["y"]]["word"]
             end
-             puts "score is", score
           else
             #else just add tile's points without multiplier
             score += next_tile["points"]
-             puts "score is", score
           end
           word_tiles << next_tile
           counter += 1
@@ -265,8 +262,71 @@ class Api::GamesController < ApplicationController
       
       end
       
-
+      ###For each played tiles check other connections with existing tiles on board
       played_tiles.each do |tile| 
+        word_multiplier = 1
+        if @game.board[tile["x"]][tile["y"]]["word"] > 1 
+          word_multiplier = @game.board[tile["x"]][tile["y"]]["word"]
+        end
+        word_tiles_points = []
+        word_tiles_points << tile["points"] * @game.board[tile["x"]][tile["y"]]["letter"]
+        if horisontal == true   
+          counter = 1
+          loop do
+            next_tile = @game.tiles.select{|t| t["x"] == tile["x"] + counter && t["y"] == tile["y"]}[0]
+            if next_tile == nil then
+              break
+            end
+
+            # score += next_tile["points"]
+            word_tiles_points << next_tile["points"]
+            counter += 1
+          end
+          loop do
+            next_tile = @game.tiles.select{|t| t["x"] == tile["x"] - counter && t["y"] == tile["y"]}[0]
+            if next_tile == nil then
+              break
+            end
+
+            # score += next_tile["points"]
+            word_tiles_points << next_tile["points"]
+            counter += 1
+          end
+          
+        elsif horisontal == false
+          word_tiles_points = []
+          word_tiles_points << tile["points"] * @game.board[tile["x"]][tile["y"]]["letter"]
+          counter = 1
+          loop do
+            next_tile = @game.tiles.select{|t| t["x"] == tile["x"] && t["y"] == tile["y"] + counter}[0]
+            if next_tile == nil then
+              break
+            end
+
+            # score += next_tile["points"]
+            word_tiles_points << next_tile["points"]
+            counter += 1
+          end
+          loop do
+            next_tile = @game.tiles.select{|t| t["x"] == tile["x"] && t["y"] == tile["y"] - counter}[0]
+            if next_tile == nil then
+              break
+            end
+
+            # score += next_tile["points"]
+            word_tiles_points << next_tile["points"]
+            counter += 1
+          end
+
+        end
+
+      if word_tiles_points.length > 1
+        score += word_tiles_points.sum * word_multiplier
+      end
+      puts word_tiles_points.sum
+      end
+
+      puts "FINAL SCORE:", score
         #get multipliers
         # x = tile["x"]
         # y = tile["y"]
@@ -280,7 +340,7 @@ class Api::GamesController < ApplicationController
 
          
          
-      end
+     
       # score = score * word_multiplier
       # puts "Your first word scored", score, "points!!!!"
 
