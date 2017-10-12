@@ -326,7 +326,7 @@ class Api::GamesController < ApplicationController
       puts word_tiles_points.sum
       end
 
-      puts "FINAL SCORE:", score
+      GamePlayer
         #get multipliers
         # x = tile["x"]
         # y = tile["y"]
