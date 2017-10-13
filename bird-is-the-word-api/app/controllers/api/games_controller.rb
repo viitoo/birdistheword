@@ -49,11 +49,7 @@ class Api::GamesController < ApplicationController
     #create new GamePlayer if Player 2 is joining this game
     if !GamePlayer.find_by(user_id: @user.id, game_id: @game.id)
       rack = @game.bag.sample(7)
-      rack.each{|tile_id| @game.bag.delete tile_id }
-
-      counter = 100
-
-      
+      rack.each{|tile_id| @game.bag.delete tile_id }     
       GamePlayer.create(user_id: @user.id, game_id: @game.id, rack: rack, player_number: 2)
     else
       game_player = GamePlayer.find_by(user_id: @user.id, game_id: @game.id)
@@ -70,8 +66,7 @@ class Api::GamesController < ApplicationController
     @game.save
 
     current_user_rack = GamePlayer.find_by(user_id: @user.id, game_id: @game.id).rack
-    players = @game.players
-    render json: @game.attributes.merge({current_user_rack: current_user_rack, players: players})
+    render json: @game.attributes.merge({current_user_rack: current_user_rack})
   end
 
   def update
