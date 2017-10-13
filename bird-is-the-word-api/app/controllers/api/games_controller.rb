@@ -334,7 +334,7 @@ class Api::GamesController < ApplicationController
       turn.points = score
       turn.save
 
-      render json: @game.attributes.merge({current_user_rack: game_player.rack, players: players})
+      render json: @game.attributes.merge({current_user_rack: game_player.rack, players: players, current_user_score: game_player.score})
     else
       render json: {message: "Error. Try again."}
     end
