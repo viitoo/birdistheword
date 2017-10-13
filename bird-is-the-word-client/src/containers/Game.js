@@ -25,10 +25,14 @@ class Game extends Component{
           <h1>Bird Is the Word</h1> 
           <Link to={`/users/${this.props.currentUser.username}`}>⬅ Back to Dashboard</Link>
           <Board board={this.props.board} tiles={this.props.tiles} />
+          <h1>Your current score is: {this.props.currentUserScore}</h1>
           <Rack tiles={this.props.tiles} rack={this.props.rack}/>
           <button onClick={() => {
-            if (this.props.game.players.length === 2 &&this.props.game.turn % 2 !== 0 && this.props.game.players.slice(-1)[0].id === this.props.currentUser.id){
-                console.log(2)
+            if (this.props.game.players.length === 1 && this.props.game.turn % 2 === 0){
+              alert("Please wait for player 2 to joing the game and take their turn!")
+              this.props.getGame(this.props.game.id)   
+            } 
+            else if (this.props.game.players.length === 2 && this.props.game.turn % 2 !== 0 && this.props.game.players.slice(-1)[0].id === this.props.currentUser.id){
                 alert("Please wait for player 1 to take their turn!")
                 this.props.getGame(this.props.game.id)   
               }
@@ -36,15 +40,7 @@ class Game extends Component{
                 alert("Please wait for player 2 to take their turn!")
                 this.props.getGame(this.props.game.id)   
               }
-            else if (this.props.game.players.length === 1 && this.props.game.turn % 2 === 0){
-               console.log(3)
-              alert("Please wait for player 2 to joing the game and take their turn!")
-              this.props.getGame(this.props.game.id)   
-            } 
-
             else {
-              console.log(4)
-              debugger
               this.props.submitWord(this.props.game.id, this.props.tiles)
             }
           }
@@ -54,8 +50,7 @@ class Game extends Component{
 
     }
     else
-      return null
-    
+      return null 
   }
 }
 
@@ -65,7 +60,8 @@ const mapStateToProps = (state) => {
     board: state.game.board,
     tiles: state.game.tiles,
     rack: state.game.current_user_rack,
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    currentUserScore: state.game.current_user_score
   })
 }
 

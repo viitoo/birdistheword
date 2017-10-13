@@ -18,10 +18,10 @@ class User extends Component{
   render(){
    
 
-    const user_games = this.props.session.games.map((game_id, index) => {
+    const user_games = this.props.session.games.map((game, index) => {
       return (
         <ul>
-          <li><Link to={`/game/${game_id}`} key={index}>{game_id}</Link></li>
+          <li><Link to={`/game/${game.id}`} key={index}> {game.player_1.username.toUpperCase()}  { game.player_2 ? "vs. " + game.player_2.username.toUpperCase() : "waiting for player 2 to join"} </Link></li>
         </ul>
       )
     })
@@ -29,7 +29,7 @@ class User extends Component{
     const available_games = this.props.available_games.map((game, index) => {
       return (
         <ul>
-          <li><Link to={`/game/${game.id}`} key={index}>{game.id}</Link></li>
+          <li><Link to={`/game/${game.id}`} key={index}>play with {game.player_1.username.toUpperCase()}</Link></li>
         </ul>
       )
     })
