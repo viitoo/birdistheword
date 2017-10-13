@@ -5,6 +5,10 @@ class GameSerializer < ActiveModel::Serializer
     {username: object.players[0].username, score: object.game_players[0].score, turns: object.game_players[0].turns}
   end
   def player_2
+    if object.players.length == 2
      {username: object.players[1].username, score: object.game_players[1].score, turns: object.game_players[1].turns}
+    else
+      nil
+    end
   end
 end

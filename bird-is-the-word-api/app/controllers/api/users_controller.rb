@@ -22,7 +22,7 @@ class Api::UsersController < ApplicationController
 
   def games
     @user = User.find(params[:user_id])
-    user_games = @user.games.map(&:id)
+    user_games = @user.games
     render json: user_games
   end
 
