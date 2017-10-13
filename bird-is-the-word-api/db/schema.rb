@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171012224920) do
     t.text     "rack",          default: [],              array: true
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.integer  "score"
+    t.integer  "score",         default: 0
   end
 
   create_table "games", force: :cascade do |t|
@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(version: 20171012224920) do
   create_table "turns", force: :cascade do |t|
     t.string   "played_word"
     t.integer  "points"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "game_player_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "users", force: :cascade do |t|

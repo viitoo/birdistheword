@@ -132,9 +132,6 @@ class Api::GamesController < ApplicationController
       @game.turn += 1
       @game.save
       players = @game.players
-      render json: @game.attributes.merge({current_user_rack: game_player.rack, players: players})
-
-
 
       #SCORING
       # FIRST WORD
@@ -198,8 +195,11 @@ class Api::GamesController < ApplicationController
           counter += 1
         end
         score = score * word_multiplier
-        puts "final score is", score
+       
         puts "you played", word_tiles.flatten.sort_by{|tile| tile["y"]}
+        word = word_tiles.flatten.sort_by{|tile| tile["y"]}.map{|tile| tile["letter"]}.join("")
+        turn = Turn.create(game_player_id: game_player.id, played_word: word)
+        puts turn
 
       #IF WORD IS VERTICAL
         
@@ -257,8 +257,10 @@ class Api::GamesController < ApplicationController
         end
 
         score = score * word_multiplier
-        puts "final score is", score
-        puts "you played", word_tiles.flatten.sort_by{|tile| tile["y"]}
+        word = word_tiles.flatten.sort_by{|tile| tile["y"]}.map{|tile| tile["letter"]}.join("")
+        turn = Turn.create(game_player_id: game_player.id, played_word: word)
+        puts turn
+
       
       end
       
@@ -323,28 +325,16 @@ class Api::GamesController < ApplicationController
       if word_tiles_points.length > 1
         score += word_tiles_points.sum * word_multiplier
       end
-      puts word_tiles_points.sum
+      puts score
       end
 
-      GamePlayer
-        #get multipliers
-        # x = tile["x"]
-        # y = tile["y"]
-        # letter_multiplier = @game.board[x][y]["letter"]
-        # if @game.board[x][y]["word"] > 1
-        #   word_multiplier = @game.board[x][y]["word"]
-        # end 
-        # score += tile["points"] * letter_multiplier
+      game_player.score += score
+      game_player.save
 
-        
+      turn.points = score
+      turn.save
 
-         
-         
-     
-      # score = score * word_multiplier
-      # puts "Your first word scored", score, "points!!!!"
-
-
+      render json: @game.attributes.merge({current_user_rack: game_player.rack, players: players})
     else
       render json: {message: "Error. Try again."}
     end
