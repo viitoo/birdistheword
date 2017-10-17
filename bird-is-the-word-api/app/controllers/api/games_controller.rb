@@ -64,7 +64,7 @@ class Api::GamesController < ApplicationController
     end
     @game.save
 
-    GameSerializer.new(@game, :current_user => @user)
+    # GameSerializer.new(@game, :current_user => @user)
     render json: @game
   end
 
@@ -328,7 +328,7 @@ class Api::GamesController < ApplicationController
       turn.points = score
       turn.save
 
-      GameSerializer.new(@game, :current_user => @user)
+      # GameSerializer.new(@game, :current_user => @user)
       render json: @game
     else
       render json: {message: "Error. Try again."}
