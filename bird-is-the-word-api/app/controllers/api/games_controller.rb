@@ -35,6 +35,7 @@ class Api::GamesController < ApplicationController
   end
 
   def show
+    
 
     #remove rack tiles coordinates
     @game.tiles.map!  do |tile|
@@ -66,7 +67,8 @@ class Api::GamesController < ApplicationController
     @game.save
 
     current_user_rack = GamePlayer.find_by(user_id: @user.id, game_id: @game.id).rack
-    render json: @game.attributes.merge({current_user_rack: current_user_rack})
+    GameSerializer.new(@game, :current_user => @user)
+    render json: @game
   end
 
   def update
