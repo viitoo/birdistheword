@@ -13,8 +13,9 @@ class GameSerializer < ActiveModel::Serializer
   end
   def current_user_rack
     if instance_options[:scope]
-      current_user_rack = GamePlayer.find_by(user_id: instance_options[:scope].id, game_id: object.id).rack
-      return {current_user_rack: current_user_rack}
+      GamePlayer.find_by(user_id: instance_options[:scope].id, game_id: object.id).rack
+    else
+      nil
     end
   end
 end

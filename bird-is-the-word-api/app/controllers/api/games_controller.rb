@@ -25,9 +25,7 @@ class Api::GamesController < ApplicationController
 
       GamePlayer.create(game_id: game.id, user_id: @user.id, player_number: 1, rack: rack)
 
-      players = game.players
-      current_user_rack = GamePlayer.find_by(user_id: @user.id, game_id: game.id).rack
-      render json: game.attributes.merge({current_user_rack: current_user_rack, players: players})
+      render json: game
 
     else
       render json: {message: "Error. Try again."}
@@ -66,7 +64,6 @@ class Api::GamesController < ApplicationController
     end
     @game.save
 
-    current_user_rack = GamePlayer.find_by(user_id: @user.id, game_id: @game.id).rack
     GameSerializer.new(@game, :current_user => @user)
     render json: @game
   end
@@ -331,7 +328,8 @@ class Api::GamesController < ApplicationController
       turn.points = score
       turn.save
 
-      render json: @game.attributes.merge({current_user_rack: game_player.rack, players: players, current_user_score: game_player.score})
+      GameSerializer.new(@game, :current_user => @user)
+      render json: @game
     else
       render json: {message: "Error. Try again."}
     end
