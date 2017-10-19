@@ -19,7 +19,7 @@ const Rack = (props) => {
 
   return(
     <div>
-      <p>Your rack</p>
+      <p>Your rack:</p>
       <table>
         <tbody>
           <tr>

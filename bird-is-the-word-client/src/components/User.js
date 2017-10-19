@@ -17,7 +17,7 @@ class User extends Component{
 
   render(){
    
-
+    console.log(this.props.available_games)
     const user_games = this.props.session.games.map((game, index) => {
       return (
         <ul>
@@ -41,7 +41,7 @@ class User extends Component{
         <button onClick={() => this.props.logOut(this.context.router)}>Log out</button>
         <button onClick={() => this.props.createGame(this.context.router)}>Start New Game</button><br />
         <h1>Join an Existing Game</h1>
-          {available_games}
+         {available_games}
         <h1>Your games:</h1>
           {user_games}
       </div>
