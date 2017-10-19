@@ -251,7 +251,7 @@ class Api::GamesController < ApplicationController
         end
 
         score = score * word_multiplier
-        word = word_tiles.flatten.sort_by{|tile| tile["y"]}.map{|tile| tile["letter"]}.join("")
+        word = word_tiles.flatten.sort_by{|tile| tile["x"]}.map{|tile| tile["letter"]}.join("")
         turn = Turn.create(game_player_id: game_player.id, played_word: word)
         puts turn
 
