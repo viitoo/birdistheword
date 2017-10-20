@@ -88,3 +88,14 @@ export const getAvailableGames = () =>
     })
   }
 }
+
+export const skipTurn = (game_id) => {
+  return dispatch => {
+    //post to skip_turn route
+  .then (response => response.json())
+  .then(game =>{
+    dispatch(startGame(game))
+  })
+  .catch(error => consol.log(error))
+  }
+}

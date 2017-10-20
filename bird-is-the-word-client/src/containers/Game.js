@@ -26,18 +26,18 @@ class Game extends Component{
           <h1>Bird Is the Word</h1> 
           <Link to={`/users/${this.props.currentUser.username}`}>⬅ Back to Dashboard</Link>
           <Board board={this.props.board} tiles={this.props.tiles} />
-          
+          <h1>Your current score is: {this.props.game.current_player_number === 1 ? this.props.game.player_1.score : this.props.game.player_2.score}</h1>
           <Rack tiles={this.props.tiles} rack={this.props.rack}/>
           <button onClick={() => {
-            if (!!this.props.game.player_1 && !!this.props.game.player_2 === null && this.props.game.turn % 2 === 0){
-              alert("Please wait for player 2 to join the game and take their turn!")
+            if (this.props.game.player_1 && this.props.game.player_2 === null && this.props.game.turn % 2 === 0){
+              alert("Please wait for player 2 to joing the game and take their turn!")
               this.props.getGame(this.props.game.id)   
             } 
-            else if (!!this.props.game.player_1 && !!this.props.game.player_2 && this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
+            else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
                 alert("Please wait for player 1 to take their turn!")
                 this.props.getGame(this.props.game.id)   
               }
-            else if (!!this.props.game.player_1 && !!this.props.game.player_2 && this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
+            else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
                 alert("Please wait for player 2 to take their turn!")
                 this.props.getGame(this.props.game.id)   
               }
@@ -45,8 +45,8 @@ class Game extends Component{
               this.props.submitWord(this.props.game.id, this.props.tiles)
             }
           }
-          }>WORD!</button>
-
+          }>WORD!</button><br/>
+          <button>Skip turn and exchange tiles</button>
           <h1>Game log: </h1>
            <GameLog player_1={this.props.game.player_1} player_2={this.props.game.player_2}/>
 
