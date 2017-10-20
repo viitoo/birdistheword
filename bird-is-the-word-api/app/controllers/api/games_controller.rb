@@ -261,6 +261,9 @@ class Api::GamesController < ApplicationController
       ###For each played tiles check other connections with existing tiles on board
       played_tiles.each do |tile| 
         word_multiplier = 1
+        puts @game
+        puts tile
+        
         if @game.board[tile["x"]][tile["y"]]["word"] > 1 
           word_multiplier = @game.board[tile["x"]][tile["y"]]["word"]
         end

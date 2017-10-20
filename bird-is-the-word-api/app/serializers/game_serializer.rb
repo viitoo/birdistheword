@@ -2,11 +2,13 @@ class GameSerializer < ActiveModel::Serializer
   attributes :id, :board, :tiles, :bag, :player_1, :player_2, :current_user_rack, :turn, :current_player_number
 
   def player_1
-    {username: object.players[0].username, score: object.game_players[0].score, turns: object.game_players[0].turns}
+    game_player = GamePlayer.where(game_id: object.id, player_number: 1)[0]
+    {username: User.find(game_player.user_id).username, score: game_player.score, turns: game_player.turns}
   end
   def player_2
     if object.players.length == 2
-     {username: object.players[1].username, score: object.game_players[1].score, turns: object.game_players[1].turns}
+      game_player = GamePlayer.where(game_id: object.id, player_number: 2)[0]
+     {username: User.find(game_player.user_id).username, score: game_player.score, turns: game_player.turns}
     else
       nil
     end
