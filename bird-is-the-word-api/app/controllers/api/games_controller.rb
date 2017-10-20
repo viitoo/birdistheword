@@ -1,6 +1,6 @@
 class Api::GamesController < ApplicationController
   before_action :authenticate_token!
-  before_action :set_game, only: [:show, :update, :destroy]
+  before_action :set_game, only: [:show, :update, :skip_turn, :destroy]
 
   def index
     render json: Game.all
@@ -350,6 +350,42 @@ class Api::GamesController < ApplicationController
     available_games = Game.all.select{|game| game.players.length == 1 && game.players[0].id != @user.id}
     render json: available_games
   end
+
+  def skip_turn
+    #remove rack tiles coordinates
+    @game.tiles.map!  do |tile|
+      if tile["y"] && tile["y"] >= 100
+        tile["y"] = nil
+        tile["x"] = nil
+      end
+      tile
+    end
+    #find game player
+    game_player = GamePlayer.find_by(game_id: @game.id, user_id: @user.id)
+    #put the tile ids back in the bag
+    @game.bag << game_player.rack
+    #empty the rack
+    game_player.rack = []
+    #get new tiles
+    rack = @game.bag.sample(7)
+      rack.each{|tile_id| @game.bag.delete tile_id }
+
+      counter = 100
+    #set rack coordinates again
+      rack.each do |tile_id| 
+        tile = @game.tiles.select{|tile| tile["id"] == tile_id.to_i }
+        tile[0]["x"] = 1
+        tile[0]["y"] = counter
+        counter += 1
+      end
+    game_player.rack = rack
+    game_player.save
+    @game.turn += 1
+    @game.save
+
+    render json: @game
+  end
+
   private
 
   def set_game
