@@ -10,6 +10,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { getGame } from '../actions/game';
 import { submitWord } from '../actions/game';
+import { skipTurn } from '../actions/game'
 
 class Game extends Component{
 
@@ -46,7 +47,16 @@ class Game extends Component{
             }
           }
           }>WORD!</button><br/>
-          <button>Skip turn and exchange tiles</button>
+          <button onClick={() => {
+            if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
+              alert("Please wait for player 1 to take their turn!")
+            } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
+              alert("Please wait for player 2 to take their turn!")
+            }else{
+              this.props.skipTurn(this.props.game.id)
+            }
+
+            }}>Skip turn and exchange tiles</button>
           <h1>Game log: </h1>
            <GameLog player_1={this.props.game.player_1} player_2={this.props.game.player_2}/>
 
@@ -70,4 +80,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default compose(connect(mapStateToProps, {getGame, submitWord}), DragDropContext(HTML5Backend))(Game);
+export default compose(connect(mapStateToProps, {getGame, submitWord, skipTurn}), DragDropContext(HTML5Backend))(Game);

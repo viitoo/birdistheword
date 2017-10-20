@@ -91,11 +91,18 @@ export const getAvailableGames = () =>
 
 export const skipTurn = (game_id) => {
   return dispatch => {
-    //post to skip_turn route
+    return fetch(`${API_URL}/skip_turn`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.jwt}`
+      },
+      body: JSON.stringify({id: game_id})
+    })
   .then (response => response.json())
   .then(game =>{
     dispatch(startGame(game))
   })
-  .catch(error => consol.log(error))
+  .catch(error => console.log(error))
   }
 }
