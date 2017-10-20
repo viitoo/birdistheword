@@ -363,7 +363,7 @@ class Api::GamesController < ApplicationController
     #find game player
     game_player = GamePlayer.find_by(game_id: @game.id, user_id: @user.id)
     #put the tile ids back in the bag
-    @game.bag << game_player.rack
+    player_rack = game_player.rack.map{|tile| @game.bag << tile.to_i}
     #empty the rack
     game_player.rack = []
     #get new tiles
