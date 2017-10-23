@@ -12,16 +12,17 @@ import { getGame } from '../actions/game';
 import { submitWord } from '../actions/game';
 import { skipTurn } from '../actions/game'
 
+
 class Game extends Component{
 
   componentDidMount(){
-      const game_id = parseInt(this.props.match.url.split("/")[2], 10)
-      this.props.getGame(game_id)   
+    const game_id = parseInt(this.props.match.url.split("/")[2], 10)
+    this.props.getGame(game_id)   
   }
 
   render(){
     if (this.props.board){
-
+     
       return (
         <div>
           <h1>Bird Is the Word</h1> 
@@ -40,7 +41,7 @@ class Game extends Component{
               }
             else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
                 alert("Please wait for player 2 to take their turn!")
-                this.props.getGame(this.props.game.id)   
+                this.props.fetchGame(this.props.game.id)   
               }
             else {
               this.props.submitWord(this.props.game.id, this.props.tiles)

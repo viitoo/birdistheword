@@ -18,8 +18,8 @@ const setAvailableGames = games =>{
 // ASYNC ACTIONS
 
 export const getGame = (game_id) => {
-  return dispatch => {
-    return fetch(`${API_URL}/games/${game_id}`,{
+  return dispatch => {    
+      return fetch(`${API_URL}/games/${game_id}`,{
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -27,10 +27,14 @@ export const getGame = (game_id) => {
       }
     })
       .then(response => response.json())
-      .then(game => dispatch(startGame(game)))
-      .catch(error => console.log(error));
+      .then(fetchedGame => {     
+          dispatch(startGame(fetchedGame))
+      })
+      .catch(error => {
+        console.log(error)
+      });
+    }      
   } 
-}
 
 export const createGame = (router) => {
   return dispatch => {
