@@ -20,5 +20,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "react-bootstrap": "^0.31.3"
+  }
 }
