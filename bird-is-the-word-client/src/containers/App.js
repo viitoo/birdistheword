@@ -6,8 +6,6 @@ import User from '../components/User'
 import Signup from '../components/Signup'
 import Login from '../components/Login'
 import Game from '../containers/Game'
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
 
 
 const PrivateRoute = ({component: Component, path, isAuthenticated, isAuthenticating}) => {

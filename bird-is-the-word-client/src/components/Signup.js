@@ -33,31 +33,40 @@ class Signup extends Component{
       <div>
         <h1>Please Sign Up</h1>
         
-  
-         <label>Username</label>
-          <input
+        <form>
+          <div class="form-group">
+            <label>Username</label>
+            <input
+            type="username"
+            className="form-control"
             name="username"
             value={this.state.user.username}
+            placeholder="Enter email"
             onChange={this.onChange}/>
-
-          <label>Password</label>
-          <input
-            name="password"
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input
             type="password"
+            className="form-control"
+            name="username"
             value={this.state.user.password}
+            placeholder="Password"
             onChange={this.onChange}/>
-        
-          <label>Password Confirmation</label>
-          <input
-            name="password_confirmation"
-            type="password"
-            value={this.state.user.password_confirmation}
-            onChange={this.onChange}/>
+          </div>
 
-          <input
-            type="submit"
-            onClick={this.onSave}/>
-        
+          <div class="form-group">
+            <label>Password Confirmation</label>
+            <input
+            type="password"
+            className="form-control"
+            name="username"
+            value={this.state.user.password_confirmation}
+            placeholder="Password confirmation"
+            onChange={this.onChange}/>
+          </div>
+          <button type="submit" className="btn btn-primary" onClick={this.onSave}>Submit</button>
+        </form>
       </div>
     )
   }
