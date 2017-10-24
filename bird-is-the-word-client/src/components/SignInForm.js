@@ -40,7 +40,7 @@ class SignIn extends Component{
             className="form-control"
             name="username"
             value={this.state.user.username}
-            placeholder="Enter email"
+            placeholder="Enter username"
             onChange={this.onChange}/>
           </div>
           <div class="form-group">
@@ -48,7 +48,7 @@ class SignIn extends Component{
             <input
             type="password"
             className="form-control"
-            name="username"
+            name="password"
             value={this.state.user.password}
             placeholder="Password"
             onChange={this.onChange}/>
