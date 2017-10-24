@@ -7,6 +7,7 @@ const Home = (props) => {
 
     return(
       <div>
+      <h1>Welcome to Bird is the Word</h1>
         <ul className="nav nav-tabs" role="tablist">
             <li className="nav-item">
               <a className="nav-link active" data-toggle="tab" href="#signin" role="tab">Sign In</a>
