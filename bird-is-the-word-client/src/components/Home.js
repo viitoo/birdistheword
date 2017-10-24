@@ -1,5 +1,6 @@
 import React from 'react';
 import SignIn from './SignInForm'
+import SignUp from './SignUpForm'
 
 
 const Home = (props) => {
@@ -20,7 +21,9 @@ const Home = (props) => {
             <div className="tab-pane active" id="signin" role="tabpanel">
               <SignIn />
             </div>
-            <div className="tab-pane" id="signup" role="tabpanel">Hi</div>
+            <div className="tab-pane" id="signup" role="tabpanel">
+              <SignUp />
+            </div>
           </div>
 
       </div>

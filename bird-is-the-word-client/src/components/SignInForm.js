@@ -32,24 +32,30 @@ class SignIn extends Component{
   render(){
     return(
       <div>
-
-         <label>Username</label>
-          <input
+        <form>
+          <div class="form-group">
+            <label>Username</label>
+            <input
+            type="username"
+            className="form-control"
             name="username"
             value={this.state.user.username}
+            placeholder="Enter email"
             onChange={this.onChange}/>
-
-          <label>Password</label>
-          <input
-            name="password"
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input
             type="password"
+            className="form-control"
+            name="username"
             value={this.state.user.password}
+            placeholder="Password"
             onChange={this.onChange}/>
-
-          <input
-            type="submit"
-            onClick={this.onSave}/>
-  
+          </div>
+          <br />
+          <button type="buttton" className="btn btn-primary" onClick={this.onSave}>Submit</button>
+        </form>  
       </div>
     )
   }
