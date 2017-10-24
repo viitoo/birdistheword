@@ -3,8 +3,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 import { connect } from 'react-redux'
 import {refreshAuth} from '../actions/sessionActions'
 import User from '../components/User'
-import Signup from '../components/Signup'
-import Login from '../components/Login'
+import Home from '../components/Home'
 import Game from '../containers/Game'
 
 
@@ -48,8 +47,7 @@ class App extends Component{
       <div>
         <Router>
           <Switch>
-            <RedirectAuthenticated exact path="/" component={Login} isAuthenticated={this.props.session.isAuthenticated} currentUser={this.props.currentUser}/>
-            <RedirectAuthenticated exact path="/signup" component={Signup} isAuthenticated={this.props.session.isAuthenticated} currentUser={this.props.currentUser}/>
+            <RedirectAuthenticated exact path="/" component={Home} isAuthenticated={this.props.session.isAuthenticated} currentUser={this.props.currentUser}/>
             <PrivateRoute exact path="/users/:username" component={User} isAuthenticating={this.props.session.isAuthenticating} isAuthenticated={this.props.session.isAuthenticated}/>
             <Route exact path= "/game/:id" component={Game} />
           
