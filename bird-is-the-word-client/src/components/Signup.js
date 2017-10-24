@@ -31,7 +31,7 @@ class Signup extends Component{
   render(){
     return(
       <div>
-        <h1>Please Sign Up</h1>
+        <h1>Sign In</h1><h1>Sign Up</h1>
         
         <form>
           <div class="form-group">
@@ -65,7 +65,8 @@ class Signup extends Component{
             placeholder="Password confirmation"
             onChange={this.onChange}/>
           </div>
-          <button type="submit" className="btn btn-primary" onClick={this.onSave}>Submit</button>
+          <br />
+          <button type="buttton" className="btn btn-primary" onClick={this.onSave}>Submit</button>
         </form>
       </div>
     )
