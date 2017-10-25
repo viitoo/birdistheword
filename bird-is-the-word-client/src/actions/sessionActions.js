@@ -58,7 +58,7 @@ export const logInUser = (user, router) => {
      
     })
      .catch(error => {
-      error =>(console.log(error))
+        error =>(console.log(error))
       }
       // throw new SubmissionError(error)
     )

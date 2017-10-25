@@ -24,52 +24,54 @@ class Game extends Component{
     if (this.props.board){
      
       return (
-        <div>
-          <h1>Bird Is the Word</h1> 
-          <Link to={`/users/${this.props.currentUser.username}`}>⬅ Back to Dashboard</Link>
-          <Board board={this.props.board} tiles={this.props.tiles} />
-          <h1>Your current score is: {this.props.game.current_player_number === 1 ? this.props.game.player_1.score : this.props.game.player_2.score}</h1>
-          <Rack tiles={this.props.tiles} rack={this.props.rack}/>
-          <button onClick={() => {
-            if (this.props.game.player_1 && this.props.game.player_2 === null && this.props.game.turn % 2 === 0){
-              alert("Please wait for player 2 to joing the game and take their turn!")
-              this.props.getGame(this.props.game.id)   
-            } 
-            else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
-                alert("Please wait for player 1 to take their turn!")
+        <div className="row">
+          <div className="col-6">
+            <Link className="btn btn-primary" role="button" to={`/users/${this.props.currentUser.username}`}>⬅ Back to Dashboard</Link>
+            <Board board={this.props.board} tiles={this.props.tiles} />
+            
+            <Rack tiles={this.props.tiles} rack={this.props.rack}/>
+            <button onClick={() => {
+              if (this.props.game.player_1 && this.props.game.player_2 === null && this.props.game.turn % 2 === 0){
+                alert("Please wait for player 2 to joing the game and take their turn!")
                 this.props.getGame(this.props.game.id)   
+              } 
+              else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
+                  alert("Please wait for player 1 to take their turn!")
+                  this.props.getGame(this.props.game.id)   
+                }
+              else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
+                  alert("Please wait for player 2 to take their turn!")
+                  this.props.fetchGame(this.props.game.id)   
+                }
+              else {
+                this.props.submitWord(this.props.game.id, this.props.tiles)
               }
-            else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
+            }
+            }>WORD!</button><br/>
+            <button onClick={() => {
+              if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
+                alert("Please wait for player 1 to take their turn!")
+              } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
                 alert("Please wait for player 2 to take their turn!")
-                this.props.fetchGame(this.props.game.id)   
+              }else{
+                this.props.skipTurn(this.props.game.id)
               }
-            else {
-              this.props.submitWord(this.props.game.id, this.props.tiles)
-            }
-          }
-          }>WORD!</button><br/>
-          <button onClick={() => {
-            if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
-              alert("Please wait for player 1 to take their turn!")
-            } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
-              alert("Please wait for player 2 to take their turn!")
-            }else{
-              this.props.skipTurn(this.props.game.id)
-            }
 
-            }}>Skip turn and exchange tiles</button>
+              }}>Skip turn and exchange tiles</button>
+          </div>
+          <div className="col-6">
 
-
-            <p>
-            <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-              Show Game Log
-            </button>
-          </p>
-          <div className="collapse" id="collapseExample">
-            <div className="card card-block">
-               <GameLog player_1={this.props.game.player_1} player_2={this.props.game.player_2}/>
+            <h1>Your current score: {this.props.game.current_player_number === 1 ? this.props.game.player_1.score : this.props.game.player_2.score}</h1>
+              <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Show Game Log
+              </button>
+            <div className="collapse" id="collapseExample">
+              <div className="card card-block">
+                 <GameLog player_1={this.props.game.player_1} player_2={this.props.game.player_2}/>
+              </div>
             </div>
           </div>
+          
            
 
         </div>
