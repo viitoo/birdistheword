@@ -1,6 +1,6 @@
 
 .orange{
-  background-color: #f0ad4e;
+  background-color: #fbc433;
 }
 .blue{
   background-color: #0275d8;
@@ -73,4 +73,7 @@ nav{
   margin-bottom: 20px;
 }
 
+.welcome-banner{
+ text-align: center;
+}
 

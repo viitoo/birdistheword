@@ -7,7 +7,11 @@ const Home = (props) => {
 
     return(
       <div>
-      <h1>Welcome to Bird is the Word</h1>
+        <div className="welcome-banner">
+          <h1>BIRD IS THE WORD</h1>
+          <img src="https://i.imgur.com/IkIjFA0.gif" alt="" width="600"/>
+        </div>
+      
         <ul className="nav nav-tabs" role="tablist">
             <li className="nav-item">
               <a className="nav-link active" data-toggle="tab" href="#signin" role="tab">Sign In</a>
