@@ -26,16 +26,25 @@ class User extends Component{
 
     const available_games = this.props.available_games.map((game, index) => {
       return (
-        <Link to={`/game/${game.id}`} key={index} className="list-group-item list-group-item-action">play with {game.player_1.username.toUpperCase()}</Link>
+        <Link to={`/game/${game.id}`} key={index} className="list-group-item list-group-item-action">Play with {game.player_1.username.toUpperCase()}</Link>
       )
     })
 
     
     return(
       <div>
-        <h1>Hey {this.props.user.username}!</h1>
-        <button onClick={() => this.props.logOut(this.context.router)}><i className="fa fa-sign-out" aria-hidden="true"></i>   Sign out</button>
-        <button onClick={() => this.props.createGame(this.context.router)}><i className="fa fa-plus-circle" aria-hidden="true"></i>   New Game</button><br />
+        <div className="navbar">
+          <nav>
+            <h1 className="navbar-item">Howdy, {this.props.user.username}!</h1>
+            <div className="navbar-item">
+              <button type="button" className="btn btn-danger" onClick={() => this.props.logOut(this.context.router)}><i className="fa fa-sign-out" aria-hidden="true"></i>   Sign out</button>
+            </div>
+          </nav>
+        </div>
+
+        <div className="new-game">
+          <button type="button" className="btn btn-danger" onClick={() => this.props.createGame(this.context.router)}><i className="fa fa-plus-circle" aria-hidden="true"></i>   New Game</button><br />
+        </div>
         <h1>Join a Game</h1>
           <div className="list-group">
             {available_games}

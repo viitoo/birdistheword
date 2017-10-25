@@ -39,5 +39,31 @@ body {
   line-height: 39px;
 }
 
+.navbar{
+  background-color: #FFC733;
+  height: 100px;
+  margin-bottom: 20px;
 
+}
+
+nav{
+  display: table;
+}
+
+.navbar-item{
+  display: table-cell;
+  padding: 20px;
+  vertical-align: middle;
+  
+}
+
+.list-group{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.new-game{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
