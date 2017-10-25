@@ -1,15 +1,15 @@
 
 .orange{
-  background-color: orange;
+  background-color: #f0ad4e;
 }
 .blue{
-  background-color: blue;
+  background-color: #0275d8;
 }
 .red{
-  background-color: red;
+  background-color: #c9302c;
 }
 .green{
-  background-color: green;
+  background-color: #5cb85c;
 }
 .square{
   width: 39px;
@@ -21,7 +21,11 @@ table{
 }
 
 td, th {
-  border: 1px solid black;
+  border: 3px solid black;
+  border-spacing: 0;
+  padding:0;
+  text-align: center;
+  vertical-align: middle;
 }
 
 body {
@@ -31,12 +35,14 @@ body {
 }
 
 .tile{
-  background-color: yellow;
-  width: 39px;
-  height: 39px;
+  display: table-cell;
+  background-color: #FBFB69;
+  width: 37px;
+  height: 36px;
+  padding: 0;
   margin: 0;
   text-align: center;
-  line-height: 39px;
+  vertical-align: middle;
 }
 
 .navbar{
