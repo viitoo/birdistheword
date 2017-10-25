@@ -25,15 +25,25 @@ class Game extends Component{
      
       return (
         <div>
-          <div className="navbar">
-            <nav>
-              <div className="navbar-item"><i className="fa fa-twitter fa-3x" aria-hidden="true"></i></div>
-              <Link className="btn btn-danger navbar-item" role="button" to={`/users/${this.props.currentUser.username}`}>⬅ Back to Dashboard</Link>
-              <div className="navbar-item">
-                <button type="button" className="btn btn-danger" onClick={() => this.props.logOut(this.context.router)}><i className="fa fa-sign-out" aria-hidden="true"></i>   Sign out</button>
-              </div>
-            </nav>
-          </div>
+          <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+            <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <a className="navbar-brand" href="#">
+              <img src="https://i.imgur.com/7pVyVwc.gif" alt="" width="200"/>
+            </a>
+
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav mr-auto">
+            
+              </ul>
+              <ul className="nav navbar-nav navbar-right">
+                <li className="nav-item">
+                  <Link className="btn btn-danger navbar-item" role="button" to={`/users/${this.props.currentUser.username}`}>⬅ Back</Link>
+                </li>
+              </ul>
+            </div>
+          </nav>
 
           <div className="row">
             <div className="col-7">

@@ -33,26 +33,40 @@ class User extends Component{
     
     return(
       <div>
-        <div className="navbar">
-          <nav>
-            <div className="navbar-item"><i className="fa fa-twitter fa-3x" aria-hidden="true"></i></div>
-            <h2 className="navbar-item">Howdy, {this.props.user.username}!</h2>
-            <div className="navbar-item">
-              <button type="button" className="btn btn-danger" onClick={() => this.props.logOut(this.context.router)}><i className="fa fa-sign-out" aria-hidden="true"></i>   Sign out</button>
-            </div>
-          </nav>
-        </div>
+
+        <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+          <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <a className="navbar-brand" href="#">
+            <img src="https://i.imgur.com/7pVyVwc.gif" alt="" width="250"/>
+          </a>
+
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+        
+            </ul>
+            <ul className="nav navbar-nav navbar-right">
+              <li className="nav-item">
+                <h3 className="greeting">Greetings, {this.props.user.username}!</h3>
+              </li>
+              <li className="nav-item">
+                <button type="link" className="btn btn-danger" onClick={() => this.props.logOut(this.context.router)}><i className="fa fa-sign-out" aria-hidden="true"></i>   Sign out</button>
+              </li>
+            </ul>
+          </div>
+        </nav>
 
         <div className="new-game">
           <button type="button" className="btn btn-danger" onClick={() => this.props.createGame(this.context.router)}><i className="fa fa-plus-circle" aria-hidden="true"></i>   New Game</button><br />
         </div>
         <h1>Join a Game</h1>
           <div className="list-group">
-            {available_games}
+              { this.props.available_games.length < 1 ? <div><h3><i className="fa fa-frown-o fa-lg" aria-hidden="true"></i> no games available</h3></div>  : available_games}
           </div>
         <h1>Continue Playing</h1>
           <div className="list-group">
-            {user_games}
+            { this.props.session.games < 1 ? <div><h3><i className="fa fa-frown-o fa-lg" aria-hidden="true"></i> you don't have any games yet</h3></div>  : user_games}
           </div>
       </div>
     )
