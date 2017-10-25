@@ -35,7 +35,8 @@ class User extends Component{
       <div>
         <div className="navbar">
           <nav>
-            <h1 className="navbar-item">Howdy, {this.props.user.username}!</h1>
+            <div className="navbar-item"><i className="fa fa-twitter fa-3x" aria-hidden="true"></i></div>
+            <h2 className="navbar-item">Howdy, {this.props.user.username}!</h2>
             <div className="navbar-item">
               <button type="button" className="btn btn-danger" onClick={() => this.props.logOut(this.context.router)}><i className="fa fa-sign-out" aria-hidden="true"></i>   Sign out</button>
             </div>
