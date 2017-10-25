@@ -46,7 +46,7 @@ class Game extends Component{
           </nav>
 
           <div className="row">
-            <div className="col-7">
+            <div className="col-sm-7">
               
               <Board board={this.props.board} tiles={this.props.tiles} />
               
@@ -80,9 +80,20 @@ class Game extends Component{
 
                 }}>Skip turn and exchange tiles</button>
             </div>
-            <div className="col-5">
+            <div className="col-sm-5">
 
               <h1>Your current score: {this.props.game.current_player_number === 1 ? this.props.game.player_1.score : this.props.game.player_2.score}</h1>
+                <div className="row">
+                  <div className="col-sm-6">
+                    <div className="square-sm red score-explanation"></div><p className="score-explanation">Double word score</p><br/>
+                    <div className="square-sm blue score-explanation"></div><p className="score-explanation">Double letter score</p>
+                  </div>
+                  <div className="col-sm-6">
+                    <div className="square-sm orange score-explanation"></div><p className="score-explanation">Triple word score</p><br/>
+                    <div className="square-sm green score-explanation"></div><p className="score-explanation">Tripple letter score</p>
+                  </div>
+                </div>
+      
                 <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                   Show Game Log
                 </button>
