@@ -58,8 +58,19 @@ class Game extends Component{
             }
 
             }}>Skip turn and exchange tiles</button>
-          <h1>Game log: </h1>
-           <GameLog player_1={this.props.game.player_1} player_2={this.props.game.player_2}/>
+
+
+            <p>
+            <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              Show Game Log
+            </button>
+          </p>
+          <div className="collapse" id="collapseExample">
+            <div className="card card-block">
+               <GameLog player_1={this.props.game.player_1} player_2={this.props.game.player_2}/>
+            </div>
+          </div>
+           
 
         </div>
       )
