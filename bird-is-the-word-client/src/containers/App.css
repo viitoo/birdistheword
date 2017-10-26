@@ -92,3 +92,17 @@ body {
   font-size: 3em;
 }
 
+.display-inline{
+  display:inline;
+  float:left;
+}
+
+.form-group{
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+label{
+  float:left;
+  margin-top:10px;
+}

@@ -51,7 +51,7 @@ class Game extends Component{
               <Board board={this.props.board} tiles={this.props.tiles} />
               
               <Rack tiles={this.props.tiles} rack={this.props.rack}/>
-              <button className="btn btn-primary" type="button"  onClick={() => {
+              <button className="btn btn-primary display-inline" type="button"  onClick={() => {
                 if (this.props.game.player_1 && this.props.game.player_2 === null && this.props.game.turn % 2 === 0){
                   alert("Please wait for player 2 to joing the game and take their turn!")
                   this.props.getGame(this.props.game.id)   
@@ -69,7 +69,7 @@ class Game extends Component{
                 }
               }
               }>WORD!</button><br/>
-              <button className="btn btn-primary" type="button" onClick={() => {
+              <button className="btn btn-primary display-inline" type="button" onClick={() => {
                 if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
                   alert("Please wait for player 1 to take their turn!")
                 } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
@@ -78,7 +78,7 @@ class Game extends Component{
                   this.props.skipTurn(this.props.game.id)
                 }
 
-                }}>Skip turn and exchange tiles</button>
+                }}>Skip turn</button>
             </div>
             <div className="col-sm-5">
 
