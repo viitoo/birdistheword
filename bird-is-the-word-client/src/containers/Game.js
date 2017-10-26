@@ -83,6 +83,7 @@ class Game extends Component{
             <div className="col-sm-5">
 
               <h1>Your current score: {this.props.game.current_player_number === 1 ? this.props.game.player_1.score : this.props.game.player_2.score}</h1>
+              <h1>{this.props.game.current_player_number === 1 ? this.props.game.player_2.username : this.props.game.player_1.username}'s score: {this.props.game.player_2 === 1 ? this.props.game.player_2.score : this.props.game.player_1.score}</h1>
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="square-sm red score-explanation"></div><p className="score-explanation">Double word score</p><br/>
