@@ -86,10 +86,10 @@ class Api::GamesController < ApplicationController
 
       #BROKEN!!!!!!!!!!!!!!!!!!!!
 
-      # played_tiles_ids.map do |id|
-      #   @game.tiles[id]["draggable"] = false
-      #   @game.save
-      # end
+      played_tiles_ids.map do |id|
+        @game.tiles[id]["draggable"] = false
+        @game.save
+      end
 
     #get leftover rack
       leftover_rack = []
