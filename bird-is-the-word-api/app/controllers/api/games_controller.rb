@@ -76,10 +76,10 @@ class Api::GamesController < ApplicationController
 
 
     played_tiles = game_params.to_h[:tiles] - @game.tiles
-    played_tiles_ids = played_tiles.map{|tile| tile["id"]}
-
-   
+    played_tiles = played_tiles.map!{|tile| tile["y"] < 100 ? tile : nil}
+    played_tiles = played_tiles.compact
     
+    played_tiles_ids = played_tiles.map{|tile| tile["id"]}
 
     if @game.update(game_params)
       #disable drag for all played tiles
@@ -120,7 +120,7 @@ class Api::GamesController < ApplicationController
         tile[0]["x"] = 1
         tile[0]["y"] = tile_counter
         tile_counter += 1
-        puts tile_counter
+       
       end
       #change turn
       @game.turn += 1
@@ -193,7 +193,7 @@ class Api::GamesController < ApplicationController
         puts "you played", word_tiles.flatten.sort_by{|tile| tile["y"]}
         word = word_tiles.flatten.sort_by{|tile| tile["y"]}.map{|tile| tile["letter"]}.join("")
         turn = Turn.create(game_player_id: game_player.id, played_word: word)
-        puts turn
+        
 
       #IF WORD IS VERTICAL
         
@@ -253,17 +253,16 @@ class Api::GamesController < ApplicationController
         score = score * word_multiplier
         word = word_tiles.flatten.sort_by{|tile| tile["x"]}.map{|tile| tile["letter"]}.join("")
         turn = Turn.create(game_player_id: game_player.id, played_word: word)
-        puts turn
+        
 
       
       end
-      
+      puts @game.board
+
       ###For each played tiles check other connections with existing tiles on board
       played_tiles.each do |tile| 
         word_multiplier = 1
-        puts @game
         puts tile
-        
         if @game.board[tile["x"]][tile["y"]]["word"] > 1 
           word_multiplier = @game.board[tile["x"]][tile["y"]]["word"]
         end
@@ -322,7 +321,6 @@ class Api::GamesController < ApplicationController
       if word_tiles_points.length > 1
         score += word_tiles_points.sum * word_multiplier
       end
-      puts score
       end
 
       game_player.score += score
@@ -383,6 +381,9 @@ class Api::GamesController < ApplicationController
     @game.turn += 1
     @game.save
 
+    #create a fake turn that says that user skipped turn
+    turn = Turn.create(game_player_id: game_player.id, played_word: "skipped turn", points: 0)
+    
     render json: @game
   end
 
