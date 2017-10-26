@@ -51,7 +51,7 @@ class Game extends Component{
               <Board board={this.props.board} tiles={this.props.tiles} />
               
               <Rack tiles={this.props.tiles} rack={this.props.rack}/>
-              <button className="btn btn-primary display-inline" type="button"  onClick={() => {
+              <button className="btn btn-danger display-inline" type="button"  onClick={() => {
                 if (this.props.game.player_1 && this.props.game.player_2 === null && this.props.game.turn % 2 === 0){
                   alert("Please wait for player 2 to joing the game and take their turn!")
                   this.props.getGame(this.props.game.id)   
@@ -62,14 +62,14 @@ class Game extends Component{
                   }
                 else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
                     alert("Please wait for player 2 to take their turn!")
-                    this.props.fetchGame(this.props.game.id)   
+                    this.props.getGame(this.props.game.id)   
                   }
                 else {
                   this.props.submitWord(this.props.game.id, this.props.tiles)
                 }
               }
               }>WORD!</button><br/>
-              <button className="btn btn-primary display-inline" type="button" onClick={() => {
+              <button className="btn btn-danger display-inline" type="button" onClick={() => {
                 if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
                   alert("Please wait for player 1 to take their turn!")
                 } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
@@ -83,7 +83,7 @@ class Game extends Component{
             <div className="col-sm-5">
 
               <h1>Your current score: {this.props.game.current_player_number === 1 ? this.props.game.player_1.score : this.props.game.player_2.score}</h1>
-              <h1>{this.props.game.current_player_number === 1 ? this.props.game.player_2.username : this.props.game.player_1.username}'s score: {this.props.game.player_2 === 1 ? this.props.game.player_2.score : this.props.game.player_1.score}</h1>
+              <h1>{this.props.game.player_2 !== null && this.props.game.current_player_number === 1 ? this.props.game.player_2.username : this.props.game.player_1.username}'s score: {this.props.game.player_2 !== null && this.props.game.current_player_number === 1 ? this.props.game.player_2.score : this.props.game.player_1.score}</h1>
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="square-sm red score-explanation"></div><p className="score-explanation">Double word score</p><br/>

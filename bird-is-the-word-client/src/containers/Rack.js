@@ -15,7 +15,12 @@ const Rack = (props) => {
       return <Square square={{"color": "white"}} x={1} y={index+100} key={index} />
   })
   
-    
+  if (rack.length < 7){
+    var number_of_squares = 7 - rack.length
+    for (var i = 0; i < number_of_squares; i++) { 
+      rack.push(<Square square={{"color": "white"}} x={1} y={(7-i)+100} />)
+    }
+  }
 
   return(
     <div className="display-inline">
