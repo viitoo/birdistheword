@@ -329,8 +329,24 @@ class Api::GamesController < ApplicationController
       turn.points = score
       turn.save
 
+
+      #check if there is a winner
+      opponents_tiles_score = 0
+      game_over = ""
+      if game_player.rack.length === 0
+        opponent = @game.players.where.not(id: @user.id)
+        opponents_rack = GamePlayer.find_by(game_id: @game.id, user_id: opponent.id).rack
+        opponents_rack.map do |tile_id| 
+          opponents_tiles_score += opponents_@game.tiles.select{|t| t["id"] == tile_id}.points
+        end
+      turn.points += score
+      turn.save
+      game_over = "Game over! " + @user.username + " won."
+      end
+      
+
       # GameSerializer.new(@game, :current_user => @user)
-      render json: @game
+      render json: @game.attributes.merge({game_over: game_over})
     else
       render json: {message: "Error. Try again."}
     end
