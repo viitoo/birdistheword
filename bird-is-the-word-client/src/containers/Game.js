@@ -81,9 +81,9 @@ class Game extends Component{
                 }}>Skip turn</button>
             </div>
             <div className="col-sm-5">
-
-              <h1>Your current score: {this.props.game.current_player_number === 1 ? this.props.game.player_1.score : this.props.game.player_2.score}</h1>
-              <h1>{this.props.game.player_2 !== null && this.props.game.current_player_number === 1 ? this.props.game.player_2.username : this.props.game.player_1.username}'s score: {this.props.game.player_2 !== null && this.props.game.current_player_number === 1 ? this.props.game.player_2.score : this.props.game.player_1.score}</h1>
+              <h1>{this.props.game.winner !== "" ? <div className="winner-alert"><p>Game over </p><p>{this.props.game.winner} is the winner!</p></div> : null}</h1>
+              <h2>Your current score: {this.props.game.current_player_number === 1 ? this.props.game.player_1.score : this.props.game.player_2.score}</h2>
+              <h2>{this.props.game.player_2 !== null && this.props.game.current_player_number === 1 ? this.props.game.player_2.username : this.props.game.player_1.username}'s score: {this.props.game.player_2 !== null && this.props.game.current_player_number === 1 ? this.props.game.player_2.score : this.props.game.player_1.score}</h2>
                 <div className="row">
                   <div className="col-sm-6">
                     <div className="square-sm red score-explanation"></div><p className="score-explanation">Double word score</p><br/>

@@ -106,3 +106,10 @@ label{
   float:left;
   margin-top:10px;
 }
+
+.winner-alert{
+  background-color: #5cb85c;
+  color: white;
+  padding:10px;
+  text-align: center;
+}
