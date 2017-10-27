@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :games, except: [:new, :edit] 
     get '/available_games', to: "games#available_games"
     post '/skip_turn', to: "games#skip_turn"
-    post '/exchange_tiles', to: "games#change_tiles"
+    post '/exchange_tiles', to: "games#exchange_tiles"
   end
 end
  
