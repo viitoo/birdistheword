@@ -23,8 +23,8 @@ const Rack = (props) => {
   }
 
   return(
-    <div className="display-inline">
-      <table>
+    <div>
+      <table className="display-inline">
         <tbody>
           <tr>
             {rack}  

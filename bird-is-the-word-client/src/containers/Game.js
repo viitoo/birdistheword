@@ -70,7 +70,7 @@ class Game extends Component{
                 }
               }
               }>WORD!</button>
-              <div>
+              <div className="button-group">
                 <button className="btn btn-danger display-inline" type="button" onClick={() => {
                   if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
                     alert("Please wait for player 1 to take their turn!")
