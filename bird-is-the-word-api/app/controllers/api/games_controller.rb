@@ -406,6 +406,7 @@ class Api::GamesController < ApplicationController
     game_player = GamePlayer.find_by(game_id: @game.id, user_id: @user.id)
     #create a fake turn that says that user skipped turn
     turn = Turn.create(game_player_id: game_player.id, played_word: "exchanged tiles", points: 0)
+    render json: @game
   end
 
   private
