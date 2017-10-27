@@ -32,7 +32,7 @@ class SignUp extends Component{
     return(
       <div>
         <form>
-          <div class="form-group">
+          <div>
             <label>Username</label>
             <input
             type="username"
@@ -42,7 +42,7 @@ class SignUp extends Component{
             placeholder="Enter username"
             onChange={this.onChange}/>
           </div>
-          <div class="form-group">
+          <div>
             <label>Password</label>
             <input
             type="password"
@@ -53,7 +53,7 @@ class SignUp extends Component{
             onChange={this.onChange}/>
           </div>
 
-          <div class="form-group">
+          <div>
             <label>Password Confirmation</label>
             <input
             type="password"
