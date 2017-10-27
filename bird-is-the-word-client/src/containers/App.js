@@ -50,7 +50,6 @@ class App extends Component{
             <RedirectAuthenticated exact path="/" component={Home} isAuthenticated={this.props.session.isAuthenticated} currentUser={this.props.currentUser}/>
             <PrivateRoute exact path="/users/:username" component={User} isAuthenticating={this.props.session.isAuthenticating} isAuthenticated={this.props.session.isAuthenticated}/>
             <Route exact path= "/game/:id" component={Game} />
-          
           </ Switch>
         </Router>
       </div>
