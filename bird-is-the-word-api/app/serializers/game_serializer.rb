@@ -33,8 +33,12 @@ class GameSerializer < ActiveModel::Serializer
   end
 
   def winner
-    if instance_options[:scope] && GamePlayer.find_by(user_id: instance_options[:scope].id, game_id: object.id).rack.length === 0
-      object.players.where.not(id: instance_options[:scope].id)[0].username.upcase
+    if instance_options[:scope] && GamePlayer.find_by(user_id: instance_options[:scope].id, game_id: object.id)
+      if GamePlayer.find_by(user_id: instance_options[:scope].id, game_id: object.id).rack.length === 0
+        object.players.where.not(id: instance_options[:scope].id)[0].username.upcase
+      else
+        ""
+      end
     else 
       ""
     end
