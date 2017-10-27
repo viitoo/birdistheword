@@ -362,7 +362,7 @@ class Api::GamesController < ApplicationController
     render json: available_games
   end
 
-  def skip_turn
+  def exchange_tiles
     #remove rack tiles coordinates
     @game.tiles.map!  do |tile|
       if tile["y"] && tile["y"] >= 100
@@ -394,10 +394,18 @@ class Api::GamesController < ApplicationController
     @game.turn += 1
     @game.save
 
-    #create a fake turn that says that user skipped turn
-    turn = Turn.create(game_player_id: game_player.id, played_word: "skipped turn", points: 0)
-    
+    #create a fake turn that says that user exchanged tiles
+    turn = Turn.create(game_player_id: game_player.id, played_word: "exchanged tiles", points: 0)
+
     render json: @game
+  end
+
+  def skip_turn
+    @game.turn += 1
+    @game.save
+    game_player = GamePlayer.find_by(game_id: @game.id, user_id: @user.id)
+    #create a fake turn that says that user skipped turn
+    turn = Turn.create(game_player_id: game_player.id, played_word: "exchanged tiles", points: 0)
   end
 
   private
