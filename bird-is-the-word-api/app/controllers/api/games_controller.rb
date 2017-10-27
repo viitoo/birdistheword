@@ -1,6 +1,6 @@
 class Api::GamesController < ApplicationController
   before_action :authenticate_token!
-  before_action :set_game, only: [:show, :update, :skip_turn, :destroy]
+  before_action :set_game, only: [:show, :update, :skip_turn, :exchange_tiles, :destroy]
 
   def index
     render json: Game.all
