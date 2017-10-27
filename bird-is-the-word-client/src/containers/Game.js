@@ -70,26 +70,28 @@ class Game extends Component{
                 }
               }
               }>WORD!</button>
-              <button className="btn btn-danger display-inline" type="button" onClick={() => {
-                if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
-                  alert("Please wait for player 1 to take their turn!")
-                } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
-                  alert("Please wait for player 2 to take their turn!")
-                }else{
-                  this.props.skipTurn(this.props.game.id)
-                }
+              <div>
+                <button className="btn btn-danger display-inline" type="button" onClick={() => {
+                  if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
+                    alert("Please wait for player 1 to take their turn!")
+                  } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
+                    alert("Please wait for player 2 to take their turn!")
+                  }else{
+                    this.props.skipTurn(this.props.game.id)
+                  }
 
-                }}>Skip turn</button>
-              <button className="btn btn-danger display-inline" type="button" onClick={() => {
-                if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
-                  alert("Please wait for player 1 to take their turn!")
-                } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
-                  alert("Please wait for player 2 to take their turn!")
-                }else{
-                  this.props.exchangeTiles(this.props.game.id)
-                }
+                  }}>Skip turn</button>
+                <button className="btn btn-danger display-inline" type="button" onClick={() => {
+                  if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
+                    alert("Please wait for player 1 to take their turn!")
+                  } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
+                    alert("Please wait for player 2 to take their turn!")
+                  }else{
+                    this.props.exchangeTiles(this.props.game.id)
+                  }
 
-                }}>Exchange tiles</button>
+                  }}>Exchange tiles</button>
+                </div>
             </div>
             <div className="col-sm-5">
               <h1>{this.props.game.winner !== "" ? <div className="winner-alert"><p>Game over </p><p>{this.props.game.winner} is the winner!</p></div> : null}</h1>
