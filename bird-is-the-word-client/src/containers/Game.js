@@ -50,28 +50,30 @@ class Game extends Component{
             <div className="col-sm-7">
               
               <Board board={this.props.board} tiles={this.props.tiles} />
-              
-              <Rack tiles={this.props.tiles} rack={this.props.rack}/>
-              <button className="btn btn-danger display-inline" type="button"  onClick={() => {
-                if (this.props.game.player_1 && this.props.game.player_2 === null && this.props.game.turn % 2 === 0){
-                  alert("Please wait for player 2 to joing the game and take their turn!")
-                  this.props.getGame(this.props.game.id)   
-                } 
-                else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
-                    alert("Please wait for player 1 to take their turn!")
+              <div className='button-group'> 
+                <Rack tiles={this.props.tiles} rack={this.props.rack}/>
+                <button className="btn btn-danger display-inline" type="button"  onClick={() => {
+                  if (this.props.game.player_1 && this.props.game.player_2 === null && this.props.game.turn % 2 === 0){
+                    alert("Please wait for player 2 to joing the game and take their turn!")
                     this.props.getGame(this.props.game.id)   
+                  } 
+                  else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
+                      alert("Please wait for player 1 to take their turn!")
+                      this.props.getGame(this.props.game.id)   
+                    }
+                  else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
+                      alert("Please wait for player 2 to take their turn!")
+                      this.props.getGame(this.props.game.id)   
+                    }
+                  else {
+                    this.props.submitWord(this.props.game.id, this.props.tiles)
                   }
-                else if (this.props.game.player_1 && this.props.game.player_2 && this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
-                    alert("Please wait for player 2 to take their turn!")
-                    this.props.getGame(this.props.game.id)   
-                  }
-                else {
-                  this.props.submitWord(this.props.game.id, this.props.tiles)
                 }
-              }
-              }>WORD!</button>
+                }>WORD!</button>
+              </div>
+              <br style={{clear:"both"}} />
               <div className="button-group">
-                <button className="btn btn-danger display-inline" type="button" onClick={() => {
+                <button className="btn btn-primary display-inline" type="button" onClick={() => {
                   if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
                     alert("Please wait for player 1 to take their turn!")
                   } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
@@ -81,7 +83,7 @@ class Game extends Component{
                   }
 
                   }}>Skip turn</button>
-                <button className="btn btn-danger display-inline" type="button" onClick={() => {
+                <button className="btn btn-primary display-inline" type="button" onClick={() => {
                   if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
                     alert("Please wait for player 1 to take their turn!")
                   } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
@@ -91,7 +93,7 @@ class Game extends Component{
                   }
 
                   }}>Exchange tiles</button>
-                </div>
+              </div>
             </div>
             <div className="col-sm-5">
               <h1>{this.props.game.winner !== "" ? <div className="winner-alert"><p>Game over </p><p>{this.props.game.winner} is the winner!</p></div> : null}</h1>
