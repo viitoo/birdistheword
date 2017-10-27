@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { getGame } from '../actions/game';
 import { submitWord } from '../actions/game';
 import { skipTurn } from '../actions/game'
+import { exchangeTiles } from '../actions/game'
 
 
 class Game extends Component{
@@ -68,7 +69,7 @@ class Game extends Component{
                   this.props.submitWord(this.props.game.id, this.props.tiles)
                 }
               }
-              }>WORD!</button><br/>
+              }>WORD!</button>
               <button className="btn btn-danger display-inline" type="button" onClick={() => {
                 if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
                   alert("Please wait for player 1 to take their turn!")
@@ -79,6 +80,16 @@ class Game extends Component{
                 }
 
                 }}>Skip turn</button>
+              <button className="btn btn-danger display-inline" type="button" onClick={() => {
+                if (this.props.game.turn % 2 !== 0 && this.props.game.current_player_number === 2){
+                  alert("Please wait for player 1 to take their turn!")
+                } else if (this.props.game.turn % 2 === 0 && this.props.game.current_player_number === 1){
+                  alert("Please wait for player 2 to take their turn!")
+                }else{
+                  this.props.exchangeTiles(this.props.game.id)
+                }
+
+                }}>Exchange tiles</button>
             </div>
             <div className="col-sm-5">
               <h1>{this.props.game.winner !== "" ? <div className="winner-alert"><p>Game over </p><p>{this.props.game.winner} is the winner!</p></div> : null}</h1>
@@ -125,4 +136,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default compose(connect(mapStateToProps, {getGame, submitWord, skipTurn}), DragDropContext(HTML5Backend))(Game);
+export default compose(connect(mapStateToProps, {getGame, submitWord, skipTurn, exchangeTiles}), DragDropContext(HTML5Backend))(Game);

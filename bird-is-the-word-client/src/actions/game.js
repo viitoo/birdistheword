@@ -110,3 +110,21 @@ export const skipTurn = (game_id) => {
   .catch(error => console.log(error))
   }
 }
+
+export const exchangeTiles = (game_id) => {
+  return dispatch => {
+    return fetch(`${API_URL}/exchange_tiles`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.jwt}`
+      },
+      body: JSON.stringify({id: game_id})
+    })
+  .then (response => response.json())
+  .then(game =>{
+    dispatch(startGame(game))
+  })
+  .catch(error => console.log(error))
+  }
+}
