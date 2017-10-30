@@ -74,10 +74,13 @@ class Api::GamesController < ApplicationController
     #for each tile in that array set draggable to false
     #SCORING: for each tile in that array check up down left and right and see if it forms the word, continue up in each direction
 
-
     played_tiles = game_params.to_h[:tiles] - @game.tiles
+   
+    played_tiles = played_tiles.map!{|tile| tile["y"] == nil ? nil : tile}
+    played_tiles = played_tiles.compact
     played_tiles = played_tiles.map!{|tile| tile["y"] < 100 ? tile : nil}
     played_tiles = played_tiles.compact
+    puts played_tiles
     
     played_tiles_ids = played_tiles.map{|tile| tile["id"]}
 
