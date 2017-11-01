@@ -85,16 +85,8 @@ class Api::GamesController < ApplicationController
     played_tiles_ids = played_tiles.map{|tile| tile["id"]}
 
     if @game.update(game_params)
-      #disable drag for all played tiles
 
-      #BROKEN!!!!!!!!!!!!!!!!!!!!
-
-      played_tiles_ids.map do |id|
-        @game.tiles[id]["draggable"] = false
-        @game.save
-      end
-
-    #get leftover rack
+      #get leftover rack
       leftover_rack = []
       counter = 100
       7.times do
@@ -137,23 +129,31 @@ class Api::GamesController < ApplicationController
       # set word direction to horisontal
       horisontal = true
       ############## CHECK IF THE WORD IS VERTICAL OR HORIZONTAL #############
+      word_multiplier = 1
 
       #IF THE WORD IS HORIZONTAL
       if played_tiles.all?{|tile| tile["x"] == played_tiles.first["x"]}
+        word_tiles = []
+        
         puts "word is horisontal"
         sorted_tiles = played_tiles.sort_by { |tile| tile["y"] }
+        puts "Sorted Played Tiles", sorted_tiles
         #all tiles that form a word: both played and the ones on board
-        word_tiles = []
-        word_multiplier = 1
+        
         #select first horizontal played tile and add its value to the score
         tile = sorted_tiles.first
         score = tile["points"] * @game.board[tile["x"]][tile["y"]]["letter"]
-        if @game.board[tile["x"]][tile["y"]]["word"] > 1
-          word_multiplier == 1 ? word_multiplier = @game.board[tile["x"]][tile["y"]]["word"] : word_multiplier += @game.board[tile["x"]][tile["y"]]["word"]
-        end
-        word_tiles << tile
 
+        #check if the first tile has WORD multiplier
+        if @game.board[tile["x"]][tile["y"]]["word"] > 1
+          word_multiplier = @game.board[tile["x"]][tile["y"]]["word"]
+        end
+
+        #place first tile in the word tiles array to begin collecting all letters of the word
+        word_tiles << tile
         counter = 1
+
+        #loop to check letters to the right
         loop do
           next_tile = @game.tiles.select{|t| t["x"] == tile["x"] && t["y"] == tile["y"] + counter }[0]
           if next_tile == nil then
@@ -172,6 +172,8 @@ class Api::GamesController < ApplicationController
           word_tiles << next_tile
           counter += 1
         end
+
+        #loop to check letters to the left
         counter = 1
         loop do
           next_tile = @game.tiles.select{|t| t["x"] == tile["x"] && t["y"] == tile["y"] - counter }[0]
@@ -191,11 +193,10 @@ class Api::GamesController < ApplicationController
           word_tiles << next_tile
           counter += 1
         end
-        score = score * word_multiplier
-       
-        puts "you played", word_tiles.flatten.sort_by{|tile| tile["y"]}
-        word = word_tiles.flatten.sort_by{|tile| tile["y"]}.map{|tile| tile["letter"]}.join("")
-        turn = Turn.create(game_player_id: game_player.id, played_word: word)
+    
+      main_word = word_tiles.flatten.sort_by{|tile| tile["y"]}.map{|tile| tile["letter"]}.join("")
+      puts "total score for the horizontal word is", score
+      puts "word is", main_word
         
 
       #IF WORD IS VERTICAL
@@ -204,6 +205,7 @@ class Api::GamesController < ApplicationController
         horisontal = false
         puts "word is vertical"
         sorted_tiles  = played_tiles.sort_by { |tile| tile["x"] }
+        puts sorted_tiles 
 
         word_tiles = []
         word_multiplier = 1
@@ -252,25 +254,28 @@ class Api::GamesController < ApplicationController
           word_tiles << next_tile
           counter += 1
         end
-
-        score = score * word_multiplier
-        word = word_tiles.flatten.sort_by{|tile| tile["x"]}.map{|tile| tile["letter"]}.join("")
-        turn = Turn.create(game_player_id: game_player.id, played_word: word)
+        main_word = word_tiles.flatten.sort_by{|tile| tile["x"]}.map{|tile| tile["letter"]}.join("")
         
-
-      
       end
-      puts @game.board
+      score = score * word_multiplier
 
       ###For each played tiles check other connections with existing tiles on board
+
+      
+      words = []
+      words << main_word
+      
       played_tiles.each do |tile| 
+        additional_points = 0
+        word_tiles = []
+        word_tiles << tile
         word_multiplier = 1
-        puts tile
+        
         if @game.board[tile["x"]][tile["y"]]["word"] > 1 
           word_multiplier = @game.board[tile["x"]][tile["y"]]["word"]
         end
-        word_tiles_points = []
-        word_tiles_points << tile["points"] * @game.board[tile["x"]][tile["y"]]["letter"]
+        additional_points = tile["points"] * @game.board[tile["x"]][tile["y"]]["letter"]
+        
         if horisontal == true   
           counter = 1
           loop do
@@ -278,10 +283,10 @@ class Api::GamesController < ApplicationController
             if next_tile == nil then
               break
             end
-
-            # score += next_tile["points"]
-            word_tiles_points << next_tile["points"]
+            word_tiles << next_tile
+            additional_points += next_tile["points"]
             counter += 1
+            
           end
           loop do
             next_tile = @game.tiles.select{|t| t["x"] == tile["x"] - counter && t["y"] == tile["y"]}[0]
@@ -289,23 +294,28 @@ class Api::GamesController < ApplicationController
               break
             end
 
-            # score += next_tile["points"]
-            word_tiles_points << next_tile["points"]
+            additional_points += next_tile["points"]
+            word_tiles << next_tile
+            # word_tiles_points << next_tile["points"]
             counter += 1
-          end
+
+
+            
+            end
+
           
         elsif horisontal == false
-          word_tiles_points = []
-          word_tiles_points << tile["points"] * @game.board[tile["x"]][tile["y"]]["letter"]
+          puts "horisontal", horisontal
+          # word_tiles_points << tile["points"] * @game.board[tile["x"]][tile["y"]]["letter"]
           counter = 1
           loop do
             next_tile = @game.tiles.select{|t| t["x"] == tile["x"] && t["y"] == tile["y"] + counter}[0]
             if next_tile == nil then
               break
             end
-
-            # score += next_tile["points"]
-            word_tiles_points << next_tile["points"]
+            additional_points += next_tile["points"]
+            word_tiles << next_tile
+            # word_tiles_points << next_tile["points"]
             counter += 1
           end
           loop do
@@ -314,28 +324,35 @@ class Api::GamesController < ApplicationController
               break
             end
 
-            # score += next_tile["points"]
-            word_tiles_points << next_tile["points"]
+            additional_points += next_tile["points"]
+            word_tiles << next_tile
+            # word_tiles_points << next_tile["points"]
             counter += 1
           end
 
         end
+        
 
-      if word_tiles_points.length > 1
-        score += word_tiles_points.sum * word_multiplier
+        if word_tiles.length > 1
+          word = word_tiles.flatten.sort_by{|tile| tile["x"]}.map{|tile| tile["letter"]}.join("")
+          additional_points = additional_points * word_multiplier
+          words << word
+          puts "adding word", word
+          puts "adding points", additional_points
+          score += additional_points
+        end
       end
-      end
-
+      puts "played words", words
+      puts "total_score", score
       game_player.score += score
       game_player.save
 
-      turn.points = score
-      turn.save
+      turn = Turn.create(game_player_id: game_player.id, played_word: words.join(", "), points: score)
 
 
       #check if there is a winner
       opponents_tiles_score = 0
-      if @game.turn ==3
+      if game_player.rack.length == 0
         opponent = @game.players.where.not(id: @user.id)[0]
         opponents_rack = GamePlayer.find_by(game_id: @game.id, user_id: opponent.id).rack
         opponents_rack.map do |tile_id| 
@@ -345,6 +362,11 @@ class Api::GamesController < ApplicationController
       turn.save
       end
 
+      #disable drag for all played tiles
+      played_tiles_ids.map do |id|
+        @game.tiles[id]["draggable"] = false
+        @game.save
+      end
       # GameSerializer.new(@game, :current_user => @user)
       render json: @game
     else
