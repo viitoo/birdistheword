@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import { connect } from 'react-redux'
 import {refreshAuth} from '../actions/sessionActions'
-import User from '../components/User'
+import User from './User'
 import Home from '../components/Home'
 import Game from '../containers/Game'
 

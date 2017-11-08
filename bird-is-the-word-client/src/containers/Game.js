@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import Board from './Board';
-import Rack from './Rack';
+import Board from '../components/Board';
+import Rack from '../components/Rack';
 import GameLog from '../components/GameLog';
 import { Link } from 'react-router-dom';
 import { DragDropContext } from 'react-dnd';

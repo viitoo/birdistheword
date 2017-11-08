@@ -1,5 +1,5 @@
 import React from 'react';
-import Square from '../components/Square'
+import Square from '../containers/Square'
 
 
 
